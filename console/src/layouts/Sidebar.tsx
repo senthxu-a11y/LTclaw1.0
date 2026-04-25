@@ -144,12 +144,13 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       path: "/chat",
       label: t("nav.chat"),
     },
-    {
-      key: "channels",
-      icon: <SparkWifiLine size={18} />,
-      path: "/channels",
-      label: t("nav.channels"),
-    },
+    // Channels, ACP, Voice Transcription hidden for LTCLAW-GY.X local deployment
+    // {
+    //   key: "channels",
+    //   icon: <SparkWifiLine size={18} />,
+    //   path: "/channels",
+    //   label: t("nav.channels"),
+    // },
     {
       key: "sessions",
       icon: <SparkUserGroupLine size={18} />,
@@ -198,12 +199,13 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       path: "/mcp",
       label: t("nav.mcp"),
     },
-    {
-      key: "acp",
-      icon: <SparkScanLine size={18} />,
-      path: "/acp",
-      label: t("nav.acp"),
-    },
+    // ACP hidden for LTCLAW-GY.X local deployment
+    // {
+    //   key: "acp",
+    //   icon: <SparkScanLine size={18} />,
+    //   path: "/acp",
+    //   label: t("nav.acp"),
+    // },
     {
       key: "agent-config",
       icon: <SparkModifyLine size={18} />,
@@ -252,12 +254,13 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       path: "/backups",
       label: t("nav.backups"),
     },
-    {
-      key: "voice-transcription",
-      icon: <SparkMicLine size={18} />,
-      path: "/voice-transcription",
-      label: t("nav.voiceTranscription"),
-    },
+    // Voice Transcription hidden for LTCLAW-GY.X local deployment
+    // {
+    //   key: "voice-transcription",
+    //   icon: <SparkMicLine size={18} />,
+    //   path: "/voice-transcription",
+    //   label: t("nav.voiceTranscription"),
+    // },
     {
       key: "debug",
       icon: <SparkDebugLine size={18} />,
@@ -331,11 +334,12 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
           label: collapsed ? null : t("nav.mcp"),
           icon: <SparkMcpMcpLine size={16} />,
         },
-        {
-          key: "acp",
-          label: collapsed ? null : t("nav.acp"),
-          icon: <SparkScanLine size={16} />,
-        },
+        // ACP hidden for LTCLAW-GY.X local deployment
+        // {
+        //   key: "acp",
+        //   label: collapsed ? null : t("nav.acp"),
+        //   icon: <SparkScanLine size={16} />,
+        // },
         {
           key: "agent-config",
           label: collapsed ? null : t("nav.agentConfig"),
@@ -392,11 +396,12 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
           label: collapsed ? null : t("nav.backups"),
           icon: <SparkSaveLine size={16} />,
         },
-        {
-          key: "voice-transcription",
-          label: collapsed ? null : t("nav.voiceTranscription"),
-          icon: <SparkMicLine size={16} />,
-        },
+        // Voice Transcription hidden for LTCLAW-GY.X local deployment
+        // {
+        //   key: "voice-transcription",
+        //   label: collapsed ? null : t("nav.voiceTranscription"),
+        //   icon: <SparkMicLine size={16} />,
+        // },
         {
           key: "debug",
           label: collapsed ? null : t("nav.debug", "Debug"),
