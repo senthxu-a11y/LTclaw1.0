@@ -1,16 +1,16 @@
 ---
 name: guidance
-description: "Answer user questions about QwenPaw installation and configuration: first locate and read local documentation, then distill the answer; if local information is insufficient, fall back to the official website documentation."
+description: "Answer user questions about LTCLAW-GY.X installation and configuration: first locate and read local documentation, then distill the answer; if local information is insufficient, fall back to the official website documentation."
 metadata:
   builtin_skill_version: "1.2"
-  qwenpaw:
+  ltclaw-gy-x:
     emoji: "🧭"
     requires: {}
 ---
 
-# QwenPaw Installation and Configuration Q&A Guide
+# LTCLAW-GY.X Installation and Configuration Q&A Guide
 
-Use this skill when the user asks about **QwenPaw installation, initialization, environment configuration, dependency requirements, or common configuration options**.
+Use this skill when the user asks about **LTCLAW-GY.X installation, initialization, environment configuration, dependency requirements, or common configuration options**.
 
 Core principles:
 
@@ -28,7 +28,7 @@ First, check whether there is a documentation directory in memory. If found, use
 
 ```bash
 # Get the documentation directory from memory
-DOC_DIR=$(find ~/.qwenpaw/memory/ -type d -name "docs")
+DOC_DIR=$(find ~/.ltclaw-gy-x/memory/ -type d -name "docs")
 ```
 
 If there is no documentation directory in memory, continue with the following logic.
@@ -39,18 +39,18 @@ Run the following script logic to obtain the variable $QWENPAW_ROOT:
 
 ```bash
 # Get the absolute path of the binary
-COP_PATH=$(which qwenpaw 2>/dev/null || whereis qwenpaw | awk '{print $2}')
+COP_PATH=$(which ltclaw-gy-x 2>/dev/null || whereis ltclaw-gy-x | awk '{print $2}')
 
-# Logical deduction: if the path contains .qwenpaw/bin/qwenpaw, the root is three levels up
-# Example: /path/to/QwenPaw/.qwenpaw/bin/qwenpaw -> /path/to/QwenPaw
-if [[ "$COP_PATH" == *".qwenpaw/bin/qwenpaw" ]]; then
-    QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.qwenpaw\/bin\/qwenpaw//')
+# Logical deduction: if the path contains .ltclaw-gy-x/bin/ltclaw-gy-x, the root is three levels up
+# Example: /path/to/LTCLAW-GY.X/.ltclaw-gy-x/bin/ltclaw-gy-x -> /path/to/LTCLAW-GY.X
+if [[ "$COP_PATH" == *".ltclaw-gy-x/bin/ltclaw-gy-x" ]]; then
+    QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.ltclaw-gy-x\/bin\/ltclaw-gy-x//')
 else
     # Fallback: try to get the parent of the parent directory
     QWENPAW_ROOT=$(dirname $(dirname "$COP_PATH") 2>/dev/null || echo ".")
 fi
 
-echo "Detected QwenPaw Root: $QWENPAW_ROOT"
+echo "Detected LTCLAW-GY.X Root: $QWENPAW_ROOT"
 ```
 
 Verify and list the documentation directory:
@@ -71,7 +71,7 @@ fi
 
 **If project documentation does not exist, search the working directory**
 
-If documentation is still not found, search for available documentation content under the qwenpaw installation path:
+If documentation is still not found, search for available documentation content under the ltclaw-gy-x installation path:
 
 ```bash
 # Look for characteristic files such as faq.en.md or config.zh.md
@@ -125,7 +125,7 @@ Language requirement: the answer language must match the language of the user's 
 
 If the previous steps cannot be completed (no local documentation, missing documentation, or insufficient information), use the official website as a fallback:
 
-- http://qwenpaw.agentscope.io/
+- http://ltclaw-gy-x.agentscope.io/
 
 Answer based on the content available from the official website, and clearly state in the answer that the conclusion comes from the official website documentation.
 

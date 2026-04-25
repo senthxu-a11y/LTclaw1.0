@@ -1,6 +1,6 @@
 # 插件系统
 
-QwenPaw 提供了插件系统，允许用户扩展 QwenPaw 的功能。
+LTCLAW-GY.X 提供了插件系统，允许用户扩展 LTCLAW-GY.X 的功能。
 
 ## 概述
 
@@ -20,27 +20,27 @@ QwenPaw 提供了插件系统，允许用户扩展 QwenPaw 的功能。
 从本地目录安装：
 
 ```bash
-qwenpaw plugin install /path/to/plugin
+ltclaw-gy-x plugin install /path/to/plugin
 ```
 
 从 URL 安装（支持 ZIP 文件）：
 
 ```bash
-qwenpaw plugin install https://example.com/plugin.zip
+ltclaw-gy-x plugin install https://example.com/plugin.zip
 ```
 
 强制重新安装：
 
 ```bash
-qwenpaw plugin install /path/to/plugin --force
+ltclaw-gy-x plugin install /path/to/plugin --force
 ```
 
-**注意**：插件操作只能在 QwenPaw 离线时执行。
+**注意**：插件操作只能在 LTCLAW-GY.X 离线时执行。
 
 ### 列出已安装插件
 
 ```bash
-qwenpaw plugin list
+ltclaw-gy-x plugin list
 ```
 
 输出示例：
@@ -52,19 +52,19 @@ Installed Plugins:
 my-provider (v1.0.0)
   Custom LLM provider integration
   Author: Developer Name
-  Path: /Users/user/.qwenpaw/plugins/my-provider
+  Path: /Users/user/.ltclaw-gy-x/plugins/my-provider
 ```
 
 ### 查看插件详情
 
 ```bash
-qwenpaw plugin info <plugin-id>
+ltclaw-gy-x plugin info <plugin-id>
 ```
 
 ### 卸载插件
 
 ```bash
-qwenpaw plugin uninstall <plugin-id>
+ltclaw-gy-x plugin uninstall <plugin-id>
 ```
 
 ## 插件开发
@@ -106,7 +106,7 @@ my-plugin/
 # -*- coding: utf-8 -*-
 """My Plugin Entry Point."""
 
-from qwenpaw.plugins.api import PluginApi
+from ltclaw-gy-x.plugins.api import PluginApi
 import logging
 
 logger = logging.getLogger(__name__)
@@ -166,18 +166,18 @@ my-plugin/
 #### src/index.tsx
 
 ```tsx
-const { React, antd } = (window as any).QwenPaw.host;
+const { React, antd } = (window as any).LTCLAW-GY.X.host;
 
 class MyPlugin {
   readonly id = "my-plugin";
 
   setup(): void {
     // 注册侧边栏页面
-    // (window as any).QwenPaw.registerRoutes?.(this.id, [...]);
+    // (window as any).LTCLAW-GY.X.registerRoutes?.(this.id, [...]);
     // 注册工具调用渲染器
-    // (window as any).QwenPaw.registerToolRender?.(this.id, {...});
+    // (window as any).LTCLAW-GY.X.registerToolRender?.(this.id, {...});
     // 访问并修改应用内部模块
-    // const mod = (window as any).QwenPaw?.modules?.['xxxx'];
+    // const mod = (window as any).LTCLAW-GY.X?.modules?.['xxxx'];
   }
 }
 
@@ -237,11 +237,11 @@ export default defineConfig({
 
 ```bash
 npm install && npm run build
-cp -r . ~/.qwenpaw/plugins/my-plugin/
-qwenpaw app
+cp -r . ~/.ltclaw-gy-x/plugins/my-plugin/
+ltclaw-gy-x app
 ```
 
-**说明**：`window.QwenPaw.host` 提供以下共享库，插件无需自行打包：
+**说明**：`window.LTCLAW-GY.X.host` 提供以下共享库，插件无需自行打包：
 
 | 名称              | 类型                       | 说明               |
 | ----------------- | -------------------------- | ------------------ |
@@ -255,7 +255,7 @@ qwenpaw app
 - `jsxRuntime: "classic"` — 将 JSX 编译为 `React.createElement`，使用宿主提供的 `React`，无需在插件中引入
 - `external: ["react", "react-dom"]` — 不打包 React，使用应用已加载的版本
 
-**`window.QwenPaw.modules`**：应用启动时会将 `src/pages/` 下的所有模块自动注册到此对象，插件可通过模块键名访问并替换内部导出
+**`window.LTCLAW-GY.X.modules`**：应用启动时会将 `src/pages/` 下的所有模块自动注册到此对象，插件可通过模块键名访问并替换内部导出
 
 > ⚠️ **注意**：`modules` 中的模块结构未作为公开 API 维护，可能随版本变化而调整，使用前请确认兼容性。
 
@@ -299,8 +299,8 @@ cd my-llm-provider
 # -*- coding: utf-8 -*-
 """My LLM Provider Implementation."""
 
-from qwenpaw.providers.openai_provider import OpenAIProvider
-from qwenpaw.providers.provider import ModelInfo
+from ltclaw-gy-x.providers.openai_provider import OpenAIProvider
+from ltclaw-gy-x.providers.provider import ModelInfo
 from typing import List
 
 
@@ -342,7 +342,7 @@ import importlib.util
 import logging
 import os
 
-from qwenpaw.plugins.api import PluginApi
+from ltclaw-gy-x.plugins.api import PluginApi
 
 logger = logging.getLogger(__name__)
 
@@ -390,10 +390,10 @@ plugin = MyLLMProviderPlugin()
 
 ```bash
 # 安装插件
-qwenpaw plugin install my-llm-provider
+ltclaw-gy-x plugin install my-llm-provider
 
-# 启动 QwenPaw
-qwenpaw app
+# 启动 LTCLAW-GY.X
+ltclaw-gy-x app
 
 # 在 Web UI 中配置 API Key
 # 然后就可以使用新的 Provider 了
@@ -401,7 +401,7 @@ qwenpaw app
 
 ### 示例 2：添加启动钩子
 
-假设你想在 QwenPaw 启动时初始化一个监控服务。
+假设你想在 LTCLAW-GY.X 启动时初始化一个监控服务。
 
 #### 1. 创建插件
 
@@ -433,7 +433,7 @@ cd monitoring-hook
 # -*- coding: utf-8 -*-
 """Monitoring Hook Plugin Entry Point."""
 
-from qwenpaw.plugins.api import PluginApi
+from ltclaw-gy-x.plugins.api import PluginApi
 import logging
 
 logger = logging.getLogger(__name__)
@@ -457,7 +457,7 @@ class MonitoringHookPlugin:
 
                 # 初始化你的监控服务
                 # from my_monitoring import init_monitoring
-                # init_monitoring(app_name="QwenPaw")
+                # init_monitoring(app_name="LTCLAW-GY.X")
 
                 logger.info("✓ Monitoring initialized successfully")
 
@@ -484,8 +484,8 @@ plugin = MonitoringHookPlugin()
 #### 4. 安装
 
 ```bash
-qwenpaw plugin install monitoring-hook
-qwenpaw app
+ltclaw-gy-x plugin install monitoring-hook
+ltclaw-gy-x app
 ```
 
 ### 示例 3：添加自定义命令
@@ -554,7 +554,7 @@ class StatusQueryRewriter:
 
 import logging
 
-from qwenpaw.plugins.api import PluginApi
+from ltclaw-gy-x.plugins.api import PluginApi
 
 logger = logging.getLogger(__name__)
 
@@ -581,7 +581,7 @@ class StatusCommandPlugin:
 
     def _patch_query_handler(self):
         """Patch AgentRunner.query_handler to rewrite /status queries."""
-        from qwenpaw.app.runner.runner import AgentRunner
+        from ltclaw-gy-x.app.runner.runner import AgentRunner
         from .query_rewriter import StatusQueryRewriter
 
         original_query_handler = AgentRunner.query_handler
@@ -627,8 +627,8 @@ plugin = StatusCommandPlugin()
 #### 5. 安装和使用
 
 ```bash
-qwenpaw plugin install status-command
-qwenpaw app
+ltclaw-gy-x plugin install status-command
+ltclaw-gy-x app
 
 # 使用命令
 /status
@@ -660,14 +660,14 @@ mkdir welcome-plugin && cd welcome-plugin
 #### 3. 创建 src/index.tsx
 
 ```tsx
-const { React, antd } = (window as any).QwenPaw.host;
+const { React, antd } = (window as any).LTCLAW-GY.X.host;
 const { Typography, Card } = antd;
 const { Title, Paragraph } = Typography;
 
 function WelcomePage() {
   return (
     <Card style={{ maxWidth: 480, margin: "40px auto" }}>
-      <Title level={2}>Welcome to QwenPaw 👋</Title>
+      <Title level={2}>Welcome to LTCLAW-GY.X 👋</Title>
       <Paragraph>插件系统运行正常！</Paragraph>
     </Card>
   );
@@ -677,7 +677,7 @@ class WelcomePlugin {
   readonly id = "welcome-plugin";
 
   setup(): void {
-    (window as any).QwenPaw.registerRoutes?.(this.id, [
+    (window as any).LTCLAW-GY.X.registerRoutes?.(this.id, [
       {
         path: "/plugin/welcome-plugin/home",
         component: WelcomePage,
@@ -746,8 +746,8 @@ export default defineConfig({
 
 ```bash
 npm install && npm run build
-cp -r . ~/.qwenpaw/plugins/welcome-plugin/
-qwenpaw app
+cp -r . ~/.ltclaw-gy-x/plugins/welcome-plugin/
+ltclaw-gy-x app
 ```
 
 ### 示例 5：自定义工具调用渲染
@@ -776,7 +776,7 @@ mkdir tool-render-plugin && cd tool-render-plugin
 #### 3. 创建 src/index.tsx
 
 ```tsx
-const { React, antd } = (window as any).QwenPaw.host;
+const { React, antd } = (window as any).LTCLAW-GY.X.host;
 const { Card } = antd;
 
 function MyToolCard({ result }) {
@@ -791,7 +791,7 @@ class ToolRenderPlugin {
   readonly id = "tool-render-plugin";
 
   setup(): void {
-    (window as any).QwenPaw.registerToolRender?.(this.id, {
+    (window as any).LTCLAW-GY.X.registerToolRender?.(this.id, {
       my_tool_name: MyToolCard, // key = tool name returned by Agent
     });
   }
@@ -808,8 +808,8 @@ new ToolRenderPlugin().setup();
 
 ```bash
 npm install && npm run build
-cp -r . ~/.qwenpaw/plugins/tool-render-plugin/
-qwenpaw app
+cp -r . ~/.ltclaw-gy-x/plugins/tool-render-plugin/
+ltclaw-gy-x app
 ```
 
 ### 示例 6：修改组件行为
@@ -842,7 +842,7 @@ class CustomGreetingPlugin {
   readonly id = "custom-greeting-plugin";
 
   setup(): void {
-    const mod = (window as any).QwenPaw?.modules?.[
+    const mod = (window as any).LTCLAW-GY.X?.modules?.[
       "Chat/OptionsPanel/defaultConfig"
     ];
     if (!mod?.configProvider) {
@@ -851,7 +851,7 @@ class CustomGreetingPlugin {
     }
 
     // 替换聊天欢迎语
-    mod.configProvider.getGreeting = () => "你好！我是定制版 QwenPaw 👋";
+    mod.configProvider.getGreeting = () => "你好！我是定制版 LTCLAW-GY.X 👋";
 
     // 替换聊天描述
     mod.configProvider.getDescription = () => "这是一个定制化的聊天助手";
@@ -876,8 +876,8 @@ new CustomGreetingPlugin().setup();
 
 ```bash
 npm install && npm run build
-cp -r . ~/.qwenpaw/plugins/custom-greeting-plugin/
-qwenpaw app
+cp -r . ~/.ltclaw-gy-x/plugins/custom-greeting-plugin/
+ltclaw-gy-x app
 ```
 
 ## 依赖管理
@@ -976,18 +976,18 @@ api.register_startup_hook("late", callback, priority=200)
 1. 检查插件是否已安装：
 
    ```bash
-   qwenpaw plugin list
+   ltclaw-gy-x plugin list
    ```
 
-2. 查看 QwenPaw 日志：
+2. 查看 LTCLAW-GY.X 日志：
 
    ```bash
-   tail -f ~/.qwenpaw/logs/qwenpaw.log | grep -i plugin
+   tail -f ~/.ltclaw-gy-x/logs/ltclaw-gy-x.log | grep -i plugin
    ```
 
 3. 验证插件清单格式：
    ```bash
-   qwenpaw plugin info <plugin-id>
+   ltclaw-gy-x plugin info <plugin-id>
    ```
 
 ### 依赖安装失败
@@ -1001,7 +1001,7 @@ api.register_startup_hook("late", callback, priority=200)
 
 ### Provider 未显示
 
-1. 确认插件已安装并重启 QwenPaw
+1. 确认插件已安装并重启 LTCLAW-GY.X
 2. 检查 Web UI 的模型管理页面
 3. 查看日志中的 provider 注册信息
 
@@ -1013,10 +1013,10 @@ api.register_startup_hook("late", callback, priority=200)
 
 ## 安全注意事项
 
-1. **只安装可信插件**：插件代码会在 QwenPaw 进程中执行
+1. **只安装可信插件**：插件代码会在 LTCLAW-GY.X 进程中执行
 2. **检查依赖**：确保插件依赖来自可信源
 3. **审查代码**：安装前审查插件源代码
-4. **离线操作**：插件安装/卸载需要 QwenPaw 离线
+4. **离线操作**：插件安装/卸载需要 LTCLAW-GY.X 离线
 
 ## PluginApi 参考
 
@@ -1062,12 +1062,12 @@ api.register_shutdown_hook(
 
 ### Monkey Patch
 
-对于需要修改 QwenPaw 行为的插件（如自定义命令），可以使用 monkey patch：
+对于需要修改 LTCLAW-GY.X 行为的插件（如自定义命令），可以使用 monkey patch：
 
 ```python
 def _patch_query_handler(self):
     """Patch AgentRunner to intercept queries."""
-    from qwenpaw.app.runner.runner import AgentRunner
+    from ltclaw-gy-x.app.runner.runner import AgentRunner
 
     original_handler = AgentRunner.query_handler
 
@@ -1107,12 +1107,12 @@ zip -r my-plugin-1.0.0.zip my-plugin/
 用户可以通过 URL 安装：
 
 ```bash
-qwenpaw plugin install https://example.com/my-plugin-1.0.0.zip
+ltclaw-gy-x plugin install https://example.com/my-plugin-1.0.0.zip
 ```
 
 ## 常见问题
 
-### Q: 插件可以访问哪些 QwenPaw API？
+### Q: 插件可以访问哪些 LTCLAW-GY.X API？
 
 A: 插件通过 `PluginApi` 访问核心功能，包括：
 
@@ -1120,7 +1120,7 @@ A: 插件通过 `PluginApi` 访问核心功能，包括：
 - Hook 注册
 - Runtime helpers（provider_manager 等）
 
-### Q: 插件可以修改 QwenPaw 的核心行为吗？
+### Q: 插件可以修改 LTCLAW-GY.X 的核心行为吗？
 
 A: 可以，通过 monkey patch 或 hook 机制。但请谨慎使用，确保不会破坏核心功能。
 

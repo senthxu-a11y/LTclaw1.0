@@ -1,9 +1,9 @@
 ---
 name: cron
-description: Use this skill only for scheduled or recurring tasks. Manage jobs with qwenpaw cron list/create/get/state/pause/resume/delete/run, and always pass --agent-id explicitly.
+description: Use this skill only for scheduled or recurring tasks. Manage jobs with ltclaw-gy-x cron list/create/get/state/pause/resume/delete/run, and always pass --agent-id explicitly.
 metadata:
   builtin_skill_version: "1.4"
-  qwenpaw:
+  ltclaw-gy-x:
     emoji: "⏰"
 ---
 
@@ -38,7 +38,7 @@ Use this skill only when you need to **automatically execute something at a futu
 
 ### Must Explicitly Specify `--agent-id`
 
-All `qwenpaw cron` commands **must** include:
+All `ltclaw-gy-x cron` commands **must** include:
 
 ```bash
 --agent-id <your_agent_id>
@@ -53,26 +53,26 @@ Do not omit it, or the task may be incorrectly created in the default agent's wo
 
 ```bash
 # List tasks
-qwenpaw cron list --agent-id <agent_id>
+ltclaw-gy-x cron list --agent-id <agent_id>
 
 # View task details
-qwenpaw cron get <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron get <job_id> --agent-id <agent_id>
 
 # View task status
-qwenpaw cron state <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron state <job_id> --agent-id <agent_id>
 
 # Create a task
-qwenpaw cron create --agent-id <agent_id> ...
+ltclaw-gy-x cron create --agent-id <agent_id> ...
 
 # Delete a task
-qwenpaw cron delete <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron delete <job_id> --agent-id <agent_id>
 
 # Pause / Resume a task
-qwenpaw cron pause <job_id> --agent-id <agent_id>
-qwenpaw cron resume <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron pause <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron resume <job_id> --agent-id <agent_id>
 
 # Run an existing task once immediately
-qwenpaw cron run <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron run <job_id> --agent-id <agent_id>
 ```
 
 ---
@@ -98,7 +98,7 @@ If any of this information is missing, confirm with the user before creating the
 ### Creation Examples
 
 ```bash
-qwenpaw cron create \
+ltclaw-gy-x cron create \
   --agent-id <agent_id> \
   --type text \
   --name "Daily Greeting" \
@@ -110,7 +110,7 @@ qwenpaw cron create \
 ```
 
 ```bash
-qwenpaw cron create \
+ltclaw-gy-x cron create \
   --agent-id <agent_id> \
   --type agent \
   --name "Check Todos" \
@@ -124,7 +124,7 @@ qwenpaw cron create \
 ### Create from JSON
 
 ```bash
-qwenpaw cron create --agent-id <agent_id> -f job_spec.json
+ltclaw-gy-x cron create --agent-id <agent_id> -f job_spec.json
 ```
 
 ---
@@ -136,7 +136,7 @@ qwenpaw cron create --agent-id <agent_id> -f job_spec.json
 2. Confirm execution time/schedule
 3. Confirm channel, target-user, target-session
 4. Explicitly include --agent-id
-5. Create the task with qwenpaw cron create
+5. Create the task with ltclaw-gy-x cron create
 6. Manage tasks afterwards with list / state / pause / resume / delete
 ```
 
@@ -173,7 +173,7 @@ If the user has not specified the time, schedule, target channel, or target sess
 Before pausing, resuming, or deleting, first run:
 
 ```bash
-qwenpaw cron list --agent-id <agent_id>
+ltclaw-gy-x cron list --agent-id <agent_id>
 ```
 
 to find the correct `job_id`.
@@ -183,8 +183,8 @@ to find the correct `job_id`.
 ## Usage Tips
 
 - When parameters are missing, ask the user before creating
-- Before modifying/pausing/deleting, run `qwenpaw cron list --agent-id <agent_id>` first
-- To troubleshoot issues, use `qwenpaw cron state <job_id> --agent-id <agent_id>`
+- Before modifying/pausing/deleting, run `ltclaw-gy-x cron list --agent-id <agent_id>` first
+- To troubleshoot issues, use `ltclaw-gy-x cron state <job_id> --agent-id <agent_id>`
 - When showing commands to the user, provide complete, copy-pasteable versions
 
 ---
@@ -192,13 +192,13 @@ to find the correct `job_id`.
 ## Help Information
 
 ```bash
-qwenpaw cron -h
-qwenpaw cron list -h
-qwenpaw cron create -h
-qwenpaw cron get -h
-qwenpaw cron state -h
-qwenpaw cron pause -h
-qwenpaw cron resume -h
-qwenpaw cron delete -h
-qwenpaw cron run -h
+ltclaw-gy-x cron -h
+ltclaw-gy-x cron list -h
+ltclaw-gy-x cron create -h
+ltclaw-gy-x cron get -h
+ltclaw-gy-x cron state -h
+ltclaw-gy-x cron pause -h
+ltclaw-gy-x cron resume -h
+ltclaw-gy-x cron delete -h
+ltclaw-gy-x cron run -h
 ```

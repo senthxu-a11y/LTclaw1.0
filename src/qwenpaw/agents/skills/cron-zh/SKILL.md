@@ -1,9 +1,9 @@
 ---
 name: cron
-description: 仅在需要未来定时执行或周期执行任务时，使用本 skill。使用 qwenpaw cron list/create/get/state/pause/resume/delete/run 管理任务，并始终显式传入 --agent-id。
+description: 仅在需要未来定时执行或周期执行任务时，使用本 skill。使用 ltclaw-gy-x cron list/create/get/state/pause/resume/delete/run 管理任务，并始终显式传入 --agent-id。
 metadata:
   builtin_skill_version: "1.4"
-  qwenpaw:
+  ltclaw-gy-x:
     emoji: "⏰"
 ---
 
@@ -38,7 +38,7 @@ metadata:
 
 ### 必须显式指定 `--agent-id`
 
-所有 `qwenpaw cron` 命令都**必须**传：
+所有 `ltclaw-gy-x cron` 命令都**必须**传：
 
 ```bash
 --agent-id <your_agent_id>
@@ -53,26 +53,26 @@ metadata:
 
 ```bash
 # 列出任务
-qwenpaw cron list --agent-id <agent_id>
+ltclaw-gy-x cron list --agent-id <agent_id>
 
 # 查看任务详情
-qwenpaw cron get <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron get <job_id> --agent-id <agent_id>
 
 # 查看任务状态
-qwenpaw cron state <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron state <job_id> --agent-id <agent_id>
 
 # 创建任务
-qwenpaw cron create --agent-id <agent_id> ...
+ltclaw-gy-x cron create --agent-id <agent_id> ...
 
 # 删除任务
-qwenpaw cron delete <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron delete <job_id> --agent-id <agent_id>
 
 # 暂停 / 恢复任务
-qwenpaw cron pause <job_id> --agent-id <agent_id>
-qwenpaw cron resume <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron pause <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron resume <job_id> --agent-id <agent_id>
 
 # 立即执行一次已有任务
-qwenpaw cron run <job_id> --agent-id <agent_id>
+ltclaw-gy-x cron run <job_id> --agent-id <agent_id>
 ```
 
 ---
@@ -98,7 +98,7 @@ qwenpaw cron run <job_id> --agent-id <agent_id>
 ### 创建示例
 
 ```bash
-qwenpaw cron create \
+ltclaw-gy-x cron create \
   --agent-id <agent_id> \
   --type text \
   --name "每日早安" \
@@ -110,7 +110,7 @@ qwenpaw cron create \
 ```
 
 ```bash
-qwenpaw cron create \
+ltclaw-gy-x cron create \
   --agent-id <agent_id> \
   --type agent \
   --name "检查待办" \
@@ -124,7 +124,7 @@ qwenpaw cron create \
 ### 从 JSON 创建
 
 ```bash
-qwenpaw cron create --agent-id <agent_id> -f job_spec.json
+ltclaw-gy-x cron create --agent-id <agent_id> -f job_spec.json
 ```
 
 ---
@@ -136,7 +136,7 @@ qwenpaw cron create --agent-id <agent_id> -f job_spec.json
 2. 确认执行时间/周期
 3. 确认 channel、target-user、target-session
 4. 显式带上 --agent-id
-5. qwenpaw cron create 创建任务
+5. ltclaw-gy-x cron create 创建任务
 6. 后续用 list / state / pause / resume / delete 管理
 ```
 
@@ -173,7 +173,7 @@ qwenpaw cron create --agent-id <agent_id> -f job_spec.json
 暂停、恢复、删除前，先用：
 
 ```bash
-qwenpaw cron list --agent-id <agent_id>
+ltclaw-gy-x cron list --agent-id <agent_id>
 ```
 
 找到正确的 `job_id`。
@@ -183,8 +183,8 @@ qwenpaw cron list --agent-id <agent_id>
 ## 使用建议
 
 - 缺少参数时，先问用户再创建
-- 修改/暂停/删除前，先 `qwenpaw cron list --agent-id <agent_id>`
-- 排查问题时，用 `qwenpaw cron state <job_id> --agent-id <agent_id>`
+- 修改/暂停/删除前，先 `ltclaw-gy-x cron list --agent-id <agent_id>`
+- 排查问题时，用 `ltclaw-gy-x cron state <job_id> --agent-id <agent_id>`
 - 给用户展示命令时，提供完整、可直接复制的版本
 
 ---
@@ -192,13 +192,13 @@ qwenpaw cron list --agent-id <agent_id>
 ## 帮助信息
 
 ```bash
-qwenpaw cron -h
-qwenpaw cron list -h
-qwenpaw cron create -h
-qwenpaw cron get -h
-qwenpaw cron state -h
-qwenpaw cron pause -h
-qwenpaw cron resume -h
-qwenpaw cron delete -h
-qwenpaw cron run -h
+ltclaw-gy-x cron -h
+ltclaw-gy-x cron list -h
+ltclaw-gy-x cron create -h
+ltclaw-gy-x cron get -h
+ltclaw-gy-x cron state -h
+ltclaw-gy-x cron pause -h
+ltclaw-gy-x cron resume -h
+ltclaw-gy-x cron delete -h
+ltclaw-gy-x cron run -h
 ```

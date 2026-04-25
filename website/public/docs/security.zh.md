@@ -1,10 +1,10 @@
 # 安全
 
-QwenPaw 内置了安全功能，保护你的 Agent 在运行过程中产生的不安全行为和不安全技能的影响。这些功能在控制台 **设置 → 安全** 中配置，也可以通过 `config.json` 进行设置。
+LTCLAW-GY.X 内置了安全功能，保护你的 Agent 在运行过程中产生的不安全行为和不安全技能的影响。这些功能在控制台 **设置 → 安全** 中配置，也可以通过 `config.json` 进行设置。
 
 ## 概述
 
-QwenPaw 的安全系统由三个核心安全层组成:
+LTCLAW-GY.X 的安全系统由三个核心安全层组成:
 
 ```
 安全架构:
@@ -251,7 +251,7 @@ QwenPaw 的安全系统由三个核心安全层组成:
 4. **目录递归保护** — 以 `/` 结尾的路径视为目录,其下所有文件和子目录都会被递归阻止
 5. **阻止机制** — 发现匹配时,工具调用以 HIGH 级别发现被阻止
 
-**默认保护**: `{WORKING_DIR}.secret/` 目录(存储 API 密钥、认证凭据和提供商配置)默认包含在敏感文件列表中。默认情况下,`WORKING_DIR` 为 `~/.qwenpaw/`,完整路径为 `~/.qwenpaw.secret/`。
+**默认保护**: `{WORKING_DIR}.secret/` 目录(存储 API 密钥、认证凭据和提供商配置)默认包含在敏感文件列表中。默认情况下,`WORKING_DIR` 为 `~/.ltclaw-gy-x/`,完整路径为 `~/.ltclaw-gy-x.secret/`。
 
 ### 配置
 
@@ -262,7 +262,7 @@ QwenPaw 的安全系统由三个核心安全层组成:
   "security": {
     "file_guard": {
       "enabled": true,
-      "sensitive_files": ["~/.ssh/", "/etc/passwd", "~/.qwenpaw.secret/"]
+      "sensitive_files": ["~/.ssh/", "/etc/passwd", "~/.ltclaw-gy-x.secret/"]
     }
   }
 }
@@ -406,11 +406,11 @@ QwenPaw 的安全系统由三个核心安全层组成:
 
 对于需要深度定制的场景,扫描器支持编程方式配置:
 
-扫描器使用 `src/qwenpaw/security/skill_scanner/rules/signatures/` 中的 YAML 规则文件。你可以通过 YAML 策略文件自定义扫描策略:
+扫描器使用 `src/ltclaw-gy-x/security/skill_scanner/rules/signatures/` 中的 YAML 规则文件。你可以通过 YAML 策略文件自定义扫描策略:
 
 ```python
-from qwenpaw.security.skill_scanner import SkillScanner
-from qwenpaw.security.skill_scanner.scan_policy import ScanPolicy
+from ltclaw-gy-x.security.skill_scanner import SkillScanner
+from ltclaw-gy-x.security.skill_scanner.scan_policy import ScanPolicy
 
 policy = ScanPolicy.from_yaml("my_org_policy.yaml")
 scanner = SkillScanner(policy=policy)
@@ -526,7 +526,7 @@ scanner = SkillScanner(policy=policy)
       "enabled": true,
       "sensitive_files": [
         "~/.ssh/",
-        "~/.qwenpaw.secret/",
+        "~/.ltclaw-gy-x.secret/",
         "/etc/passwd",
         "/etc/shadow",
         ".env",
@@ -552,13 +552,13 @@ scanner = SkillScanner(policy=policy)
 
 ## Web 登录认证
 
-QwenPaw 支持可选的 Web 登录认证,保护控制台免受未授权访问。认证**默认关闭**,需要通过 `QWENPAW_AUTH_ENABLED` 环境变量显式启用。
+LTCLAW-GY.X 支持可选的 Web 登录认证,保护控制台免受未授权访问。认证**默认关闭**,需要通过 `QWENPAW_AUTH_ENABLED` 环境变量显式启用。
 
 ![login](https://img.alicdn.com/imgextra/i4/O1CN01VdXCuP1tWpsl0TlQ5_!!6000000005910-2-tps-3822-2070.png)
 
 ### 工作原理
 
-1. **启用认证** — 设置 `QWENPAW_AUTH_ENABLED=true` 并启动 QwenPaw
+1. **启用认证** — 设置 `QWENPAW_AUTH_ENABLED=true` 并启动 LTCLAW-GY.X
 2. **注册流程**:
    - 首次访问时,控制台显示**注册页面**
    - 创建唯一的管理员账户(用户名 + 密码)
@@ -569,9 +569,9 @@ QwenPaw 支持可选的 Web 登录认证,保护控制台免受未授权访问。
    - 令牌存储在浏览器 localStorage,自动附加到所有 API 请求
 4. **自动注册**(可选):
    - 设置 `QWENPAW_AUTH_USERNAME` 和 `QWENPAW_AUTH_PASSWORD` 环境变量
-   - QwenPaw 启动时自动创建管理员账户,跳过网页注册
+   - LTCLAW-GY.X 启动时自动创建管理员账户,跳过网页注册
    - 适用于 Docker、Kubernetes、服务器管理面板等自动化部署场景
-5. **本地免认证** — 来自本地(`127.0.0.1` / `::1`)的请求自动跳过认证,CLI 命令(`qwenpaw app`、`qwenpaw chat` 等)无需令牌即可正常工作
+5. **本地免认证** — 来自本地(`127.0.0.1` / `::1`)的请求自动跳过认证,CLI 命令(`ltclaw-gy-x app`、`ltclaw-gy-x chat` 等)无需令牌即可正常工作
 
 **安全特性**:
 
@@ -607,13 +607,13 @@ QwenPaw 支持可选的 Web 登录认证,保护控制台免受未授权访问。
 ```bash
 # 基础启用(网页注册)
 export QWENPAW_AUTH_ENABLED=true
-qwenpaw app
+ltclaw-gy-x app
 
 # 或: 自动注册模式
 export QWENPAW_AUTH_ENABLED=true
 export QWENPAW_AUTH_USERNAME=admin
 export QWENPAW_AUTH_PASSWORD=mypassword
-qwenpaw app
+ltclaw-gy-x app
 ```
 
 如需永久生效,将 `export` 行添加到 `~/.bashrc`、`~/.zshrc` 或等效文件中。
@@ -625,7 +625,7 @@ set QWENPAW_AUTH_ENABLED=true
 rem 可选: 自动注册
 rem set QWENPAW_AUTH_USERNAME=admin
 rem set QWENPAW_AUTH_PASSWORD=mypassword
-qwenpaw app
+ltclaw-gy-x app
 ```
 
 **Windows (PowerShell):**
@@ -635,7 +635,7 @@ $env:QWENPAW_AUTH_ENABLED = "true"
 # 可选: 自动注册
 # $env:QWENPAW_AUTH_USERNAME = "admin"
 # $env:QWENPAW_AUTH_PASSWORD = "mypassword"
-qwenpaw app
+ltclaw-gy-x app
 ```
 
 #### Docker
@@ -647,10 +647,10 @@ docker run -e QWENPAW_AUTH_ENABLED=true \
   -e QWENPAW_AUTH_USERNAME=admin \
   -e QWENPAW_AUTH_PASSWORD=mypassword \
   -p 127.0.0.1:8088:8088 \
-  -v qwenpaw-data:/app/working \
-  -v qwenpaw-secrets:/app/working.secret \
-  -v qwenpaw-backups:/app/working.backups \
-  agentscope/qwenpaw:latest
+  -v ltclaw-gy-x-data:/app/working \
+  -v ltclaw-gy-x-secrets:/app/working.secret \
+  -v ltclaw-gy-x-backups:/app/working.backups \
+  agentscope/ltclaw-gy-x:latest
 ```
 
 > **提示**: 不使用自动注册时,移除 `QWENPAW_AUTH_USERNAME` 和 `QWENPAW_AUTH_PASSWORD`,首次通过浏览器注册。
@@ -659,8 +659,8 @@ docker run -e QWENPAW_AUTH_ENABLED=true \
 
 ```yaml
 services:
-  qwenpaw:
-    image: agentscope/qwenpaw:latest
+  ltclaw-gy-x:
+    image: agentscope/ltclaw-gy-x:latest
     ports:
       - "127.0.0.1:8088:8088"
     environment:
@@ -668,9 +668,9 @@ services:
       - QWENPAW_AUTH_USERNAME=admin
       - QWENPAW_AUTH_PASSWORD=mypassword
     volumes:
-      - qwenpaw-data:/app/working
-      - qwenpaw-secrets:/app/working.secret
-      - qwenpaw-backups:/app/working.backups
+      - ltclaw-gy-x-data:/app/working
+      - ltclaw-gy-x-secrets:/app/working.secret
+      - ltclaw-gy-x-backups:/app/working.backups
 ```
 
 #### 环境文件 (.env)
@@ -683,19 +683,19 @@ QWENPAW_AUTH_USERNAME=admin
 QWENPAW_AUTH_PASSWORD=mypassword
 ```
 
-然后通过 `--env-file .env` 传递给 Docker，或在运行 `qwenpaw app` 前在 shell 中 source 该文件。
+然后通过 `--env-file .env` 传递给 Docker，或在运行 `ltclaw-gy-x app` 前在 shell 中 source 该文件。
 
 ### 关闭认证
 
-移除或取消环境变量并重启 QwenPaw：
+移除或取消环境变量并重启 LTCLAW-GY.X：
 
 ```bash
 # Linux / macOS
 unset QWENPAW_AUTH_ENABLED
-qwenpaw app
+ltclaw-gy-x app
 
 # Docker — 移除 -e 参数即可。以下示例包含用于持久化的卷。
-docker run -p 127.0.0.1:8088:8088 -v qwenpaw-data:/app/working -v qwenpaw-secrets:/app/working.secret -v qwenpaw-backups:/app/working.backups agentscope/qwenpaw:latest
+docker run -p 127.0.0.1:8088:8088 -v ltclaw-gy-x-data:/app/working -v ltclaw-gy-x-secrets:/app/working.secret -v ltclaw-gy-x-backups:/app/working.backups agentscope/ltclaw-gy-x:latest
 ```
 
 ### 重置密码
@@ -703,7 +703,7 @@ docker run -p 127.0.0.1:8088:8088 -v qwenpaw-data:/app/working -v qwenpaw-secret
 如果忘记密码,使用 CLI 命令重置:
 
 ```bash
-qwenpaw auth reset-password
+ltclaw-gy-x auth reset-password
 ```
 
 该命令会:
@@ -715,7 +715,7 @@ qwenpaw auth reset-password
 **Docker 部署**:
 
 ```bash
-docker exec -it <容器名> qwenpaw auth reset-password
+docker exec -it <容器名> ltclaw-gy-x auth reset-password
 ```
 
 **替代方案**:
@@ -724,9 +724,9 @@ docker exec -it <容器名> qwenpaw auth reset-password
 
 ```bash
 # 删除认证文件
-rm ~/.qwenpaw.secret/auth.json  # 或 $WORKING_DIR.secret/auth.json
-# 重启 QwenPaw,下次访问时重新注册
-qwenpaw app
+rm ~/.ltclaw-gy-x.secret/auth.json  # 或 $WORKING_DIR.secret/auth.json
+# 重启 LTCLAW-GY.X,下次访问时重新注册
+ltclaw-gy-x app
 ```
 
 ### 退出登录

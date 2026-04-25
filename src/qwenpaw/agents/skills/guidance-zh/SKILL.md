@@ -1,16 +1,16 @@
 ---
 name: guidance
-description: "回答用户关于 QwenPaw 安装与配置的问题：优先定位并阅读本地文档，再提炼答案；若本地信息不足，兜底访问官网文档。"
+description: "回答用户关于 LTCLAW-GY.X 安装与配置的问题：优先定位并阅读本地文档，再提炼答案；若本地信息不足，兜底访问官网文档。"
 metadata:
   builtin_skill_version: "1.2"
-  qwenpaw:
+  ltclaw-gy-x:
     emoji: "🧭"
     requires: {}
 ---
 
-# QwenPaw 安装与配置问答指南
+# LTCLAW-GY.X 安装与配置问答指南
 
-当用户询问 **QwenPaw 的安装、初始化、环境配置、依赖要求、常见配置项** 时，使用本 skill。
+当用户询问 **LTCLAW-GY.X 的安装、初始化、环境配置、依赖要求、常见配置项** 时，使用本 skill。
 
 核心原则：
 
@@ -29,7 +29,7 @@ metadata:
 
 ```bash
 # 获取memory中的文档目录
-DOC_DIR=$(find ~/.qwenpaw/memory/ -type d -name "docs")
+DOC_DIR=$(find ~/.ltclaw-gy-x/memory/ -type d -name "docs")
 ```
 
 如果 memory 中没有文档目录，则继续执行下面的逻辑。
@@ -40,18 +40,18 @@ DOC_DIR=$(find ~/.qwenpaw/memory/ -type d -name "docs")
 
 ```bash
 # 获取二进制绝对路径
-COP_PATH=$(which qwenpaw 2>/dev/null || whereis qwenpaw | awk '{print $2}')
+COP_PATH=$(which ltclaw-gy-x 2>/dev/null || whereis ltclaw-gy-x | awk '{print $2}')
 
-# 逻辑推导：如果路径包含 .qwenpaw/bin/qwenpaw，则根目录在其上三层
-# 例如：/path/to/QwenPaw/.qwenpaw/bin/qwenpaw -> /path/to/QwenPaw
-if [[ "$COP_PATH" == *".qwenpaw/bin/qwenpaw" ]]; then
-    QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.qwenpaw\/bin\/qwenpaw//')
+# 逻辑推导：如果路径包含 .ltclaw-gy-x/bin/ltclaw-gy-x，则根目录在其上三层
+# 例如：/path/to/LTCLAW-GY.X/.ltclaw-gy-x/bin/ltclaw-gy-x -> /path/to/LTCLAW-GY.X
+if [[ "$COP_PATH" == *".ltclaw-gy-x/bin/ltclaw-gy-x" ]]; then
+    QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.ltclaw-gy-x\/bin\/ltclaw-gy-x//')
 else
     # 兜底：尝试获取所在目录的父目录
     QWENPAW_ROOT=$(dirname $(dirname "$COP_PATH") 2>/dev/null || echo ".")
 fi
 
-echo "Detected QwenPaw Root: $QWENPAW_ROOT"
+echo "Detected LTCLAW-GY.X Root: $QWENPAW_ROOT"
 ```
 
 验证并列出文档目录：
@@ -71,7 +71,7 @@ fi
 ```
 **如果项目文档不存在，搜索工作目录**
 
-如果还是找不到文档，搜索 qwenpaw 安装路径下的可用文档内容：
+如果还是找不到文档，搜索 ltclaw-gy-x 安装路径下的可用文档内容：
 
 ```bash
 # 寻找 faq.en.md 或 config.zh.md 等特征文件
@@ -125,7 +125,7 @@ find $DOC_DIR -type f -name "*.md"
 
 若前面步骤无法完成（本地无文档、文档缺失、信息不足），使用官网作为兜底：
 
-- http://qwenpaw.agentscope.io/
+- http://ltclaw-gy-x.agentscope.io/
 
 基于官网可获得内容继续回答，并在答案中明确说明该结论来自官网文档。
 
