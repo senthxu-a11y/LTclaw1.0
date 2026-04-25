@@ -1209,11 +1209,11 @@ export function ChannelDrawer({
               const url =
                 CHANNEL_DOC_EN_URLS[activeKey]! ||
                 CHANNEL_DOC_ZH_URLS[activeKey]!;
-              const isLTCLAW-GY.XDoc = url.includes(
+              const isLTDoc = url.includes(
                 "ltclaw_gy_x.agentscope.io/docs/channels/",
               );
               const finalUrl =
-                isLTCLAW-GY.XDoc && currentLang === "zh"
+                isLTDoc && currentLang === "zh"
                   ? CHANNEL_DOC_ZH_URLS[activeKey]!
                   : CHANNEL_DOC_EN_URLS[activeKey]!;
               window.open(finalUrl, "_blank");

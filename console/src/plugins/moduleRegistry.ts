@@ -5,7 +5,7 @@
  *
  * How it works:
  * 1. Host app calls moduleRegistry.register() at startup to register all @patchable modules
- * 2. Plugins access and modify module exports via window.LTCLAW-GY.X.modules
+ * 2. Plugins access and modify module exports via window.LTCLAWGYX.modules
  * 3. Host code accesses modules via moduleRegistry.get/call to ensure using plugin-modified versions
  */
 
@@ -106,7 +106,7 @@ class ModuleRegistryImpl implements ModuleRegistry {
   }
 
   /**
-   * Get all modules (for window.LTCLAW-GY.X.modules)
+   * Get all modules (for window.LTCLAWGYX.modules)
    */
   getAllModules(): Record<string, Record<string, unknown>> {
     const result: Record<string, Record<string, unknown>> = {};
@@ -119,15 +119,15 @@ class ModuleRegistryImpl implements ModuleRegistry {
 
 export const moduleRegistry = new ModuleRegistryImpl();
 
-// Expose to window.LTCLAW-GY.X.modules (for plugin use)
+// Expose to window.LTCLAWGYX.modules (for plugin use)
 // Set during initialization
 if (typeof window !== "undefined") {
-  if (!window.LTCLAW-GY.X) {
-    (window as any).LTCLAW-GY.X = {};
+  if (!window.LTCLAWGYX) {
+    (window as any).LTCLAWGYX = {};
   }
 
   // Use Proxy for dynamic access, ensuring plugins always get latest module state
-  Object.defineProperty(window.LTCLAW-GY.X, "modules", {
+  Object.defineProperty(window.LTCLAWGYX, "modules", {
     get() {
       return (moduleRegistry as any).getAllModules();
     },

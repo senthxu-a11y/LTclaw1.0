@@ -2,7 +2,7 @@
  * hostExternals.ts
  *
  * Exposes shared host dependencies and a reactive plugin registry on
- * `window.LTCLAW-GY.X` so plugin bundles can register routes and tool renderers
+ * `window.LTCLAWGYX` so plugin bundles can register routes and tool renderers
  * without bundling their own copies of React / antd.
  *
  * Call `installHostExternals()` once at application startup (main.tsx).
@@ -20,7 +20,7 @@ declare const VITE_API_BASE_URL: string;
 // Public types
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Shared host dependencies exposed to plugin bundles via `window.LTCLAW-GY.X.host`. */
+/** Shared host dependencies exposed to plugin bundles via `window.LTCLAWGYX.host`. */
 export interface HostExternals {
   React: typeof React;
   ReactDOM: typeof ReactDOM;
@@ -141,7 +141,7 @@ export interface WindowNamespace {
 
 declare global {
   interface Window {
-    LTCLAW-GY.X: WindowNamespace;
+    LTCLAWGYX: WindowNamespace;
   }
 }
 
@@ -153,12 +153,12 @@ export function installHostExternals(): void {
   const apiBaseUrl =
     typeof VITE_API_BASE_URL !== "undefined" ? VITE_API_BASE_URL : "";
 
-  if (!window.LTCLAW-GY.X) {
-    (window as any).LTCLAW-GY.X = {} as WindowNamespace;
+  if (!window.LTCLAWGYX) {
+    (window as any).LTCLAWGYX = {} as WindowNamespace;
   }
 
-  if (!window.LTCLAW-GY.X.host) {
-    window.LTCLAW-GY.X.host = {
+  if (!window.LTCLAWGYX.host) {
+    window.LTCLAWGYX.host = {
       React,
       ReactDOM,
       antd,
@@ -169,8 +169,8 @@ export function installHostExternals(): void {
     };
   }
 
-  if (!window.LTCLAW-GY.X.registerRoutes) {
-    window.LTCLAW-GY.X.registerRoutes = (pluginId, routes) => {
+  if (!window.LTCLAWGYX.registerRoutes) {
+    window.LTCLAWGYX.registerRoutes = (pluginId, routes) => {
       pluginSystem.addRoutes(pluginId, routes);
       console.info(
         `[plugin:${pluginId}] registerRoutes → ${routes.length} route(s)`,
@@ -178,8 +178,8 @@ export function installHostExternals(): void {
     };
   }
 
-  if (!window.LTCLAW-GY.X.registerToolRender) {
-    window.LTCLAW-GY.X.registerToolRender = (pluginId, renderers) => {
+  if (!window.LTCLAWGYX.registerToolRender) {
+    window.LTCLAWGYX.registerToolRender = (pluginId, renderers) => {
       pluginSystem.addToolRenderers(pluginId, renderers);
       console.info(
         `[plugin:${pluginId}] registerToolRender → ${Object.keys(

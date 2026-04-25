@@ -69,13 +69,13 @@ export const KEY_TO_LABEL: Record<string, string> = {
 export const getWebsiteLang = (lang: string): string =>
   lang.startsWith("zh") ? "zh" : "en";
 
-export const getDocsUrl = (lang: string): string =>
+export const getDocsUrl = (_lang: string): string =>
   `#`;  // Disabled - LTCLAW-GY.X local deployment
 
-export const getFaqUrl = (lang: string): string =>
+export const getFaqUrl = (_lang: string): string =>
   `#`;  // Disabled - LTCLAW-GY.X local deployment
 
-export const getReleaseNotesUrl = (lang: string): string =>
+export const getReleaseNotesUrl = (_lang: string): string =>
   `#`;  // Disabled - LTCLAW-GY.X local deployment
 
 // ── Version helpers ────────────────────────────────────────────────────────
