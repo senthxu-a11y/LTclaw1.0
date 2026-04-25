@@ -153,11 +153,8 @@ export default function Header() {
     <>
       <AntHeader className={styles.header}>
         <div className={styles.logoWrapper}>
-          <img
-            src={isDark ? "/logo-dark.svg" : "/logo-light.svg"}
-            alt="LTCLAW-GY.X"
-            className={styles.logoImg}
-          />
+          <span className={styles.logoText}>LTCLAW-GY.X</span>
+          <span className={styles.logoVersion}>版本 1.0.0</span>
           <div className={styles.logoDivider} />
           {version && (
             <Badge
