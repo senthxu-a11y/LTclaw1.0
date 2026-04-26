@@ -11,7 +11,6 @@
 [![GitHub Star](https://img.shields.io/github/stars/senthxu-a11y/LTclaw1.0?style=flat&logo=github&color=yellow&label=Star)](https://github.com/senthxu-a11y/LTclaw1.0/stargazers)
 [![GitHub Fork](https://img.shields.io/github/forks/senthxu-a11y/LTclaw1.0?style=flat&logo=github&color=purple&label=Fork)](https://github.com/senthxu-a11y/LTclaw1.0/network)
 
-[[English](README.md)] [[日本語](README_ja.md)] [[Русский](README_ru.md)]
 
 <p align="center">
   <img src="https://gw.alicdn.com/imgextra/i1/O1CN01sens5C1TuwioeGexL_!!6000000002443-55-tps-771-132.svg" alt="LTCLAW-GY.X Logo" width="120">
