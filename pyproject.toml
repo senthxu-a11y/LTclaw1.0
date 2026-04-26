@@ -1,5 +1,5 @@
 [project]
-name = "qwenpaw"
+name = "ltclaw_gy_x"
 dynamic = ["version"]
 description = "QwenPaw is a **personal assistant** that runs in your own environment. It talks to you over multiple channels (DingTalk, Feishu, QQ, Discord, iMessage, etc.) and runs scheduled tasks according to your configuration. **What it can do is driven by Skills — the possibilities are open-ended.** Built-in skills include cron, PDF/Office handling, news digest, file reading, and more; you can add custom skills. All data and tasks run on your machine; no third-party hosting."
 readme = "README.md"
@@ -48,15 +48,15 @@ dependencies = [
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "qwenpaw.__version__.__version__"}
+version = {attr = "ltclaw_gy_x.__version__.__version__"}
 
 [tool.setuptools]
 packages = { find = { where = ["src"] } }
 include-package-data = true
 
 [tool.setuptools.package-data]
-# Dockerfile copies console build output to src/qwenpaw/console/ (no dist subdir).
-"qwenpaw" = [
+# Dockerfile copies console build output to src/ltclaw_gy_x/console/ (no dist subdir).
+"ltclaw_gy_x" = [
     "console/**",
     "agents/md_files/**",
     "agents/skills/**",
@@ -71,8 +71,8 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-qwenpaw = "qwenpaw.cli.main:cli"
-copaw = "qwenpaw.cli.main:cli"
+ltclaw = "ltclaw_gy_x.cli.main:cli"
+ltclaw_gy_x = "ltclaw_gy_x.cli.main:cli"
 
 # Optional doctor plugins: callable (DoctorRunContext) -> list[str]
 # [project.entry-points."qwenpaw.doctor"]
@@ -94,7 +94,7 @@ whisper = [
     "openai-whisper>=20231117",
 ]
 full = [
-    "qwenpaw[local,whisper]",
+    "ltclaw_gy_x[local,whisper]",
 ]
 sip = [
     "pyVoIP>=1.6.0",
@@ -103,7 +103,7 @@ sip = [
     "audioop-lts; python_version >= '3.13'",
 ]
 sip-livekit = [
-    "qwenpaw[sip]",
+    "ltclaw_gy_x[sip]",
     "livekit>=1.0.0",
     "livekit-api>=0.6.0",
 ]
@@ -122,7 +122,7 @@ testpaths = [
 ]
 
 [tool.coverage.run]
-source = ["src/qwenpaw"]
+source = ["src/ltclaw_gy_x"]
 omit = [
     "*/tests/*",
     "*/test_*",
