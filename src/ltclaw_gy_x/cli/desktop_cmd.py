@@ -226,7 +226,6 @@ def desktop_cmd(
                     url,
                     width=1280,
                     height=800,
-                    maximized=True,
                     focus=True,
                     text_select=True,
                     js_api=api,
