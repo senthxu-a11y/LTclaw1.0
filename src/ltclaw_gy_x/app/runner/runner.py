@@ -31,7 +31,7 @@ from .mission_dispatch import (
 from .session import SafeJSONSession
 from .utils import build_env_context
 from ..channels.schema import DEFAULT_CHANNEL
-from ...agents.react_agent import LTCLAW-GY.XAgent
+from ...agents.react_agent import LTClawGYXAgent
 from ...exceptions import convert_model_exception
 from ...agents.utils.file_handling import (
     read_text_file_with_encoding_fallback,
@@ -544,7 +544,7 @@ class AgentRunner(Runner):
                     )
                     plan_notebook = None
 
-            agent = LTCLAW-GY.XAgent(
+            agent = LTClawGYXAgent(
                 agent_config=agent_config,
                 env_context=env_context,
                 mcp_clients=mcp_clients,

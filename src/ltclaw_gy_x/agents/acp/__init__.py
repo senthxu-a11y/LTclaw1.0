@@ -9,7 +9,7 @@ from .core import (
     ACPErrors,
     SuspendedPermission,
 )
-from .server import LTCLAW-GY.XACPAgent, run_ltclaw_gy_x_agent
+from .server import LTClawGYXACPAgent, run_ltclaw_gy_x_agent
 from .service import (
     ACPService,
     close_acp_service,
@@ -24,7 +24,7 @@ __all__ = [
     "ACPSessionError",
     "ACPTransportError",
     "ACPService",
-    "LTCLAW-GY.XACPAgent",
+    "LTClawGYXACPAgent",
     "close_acp_service",
     "get_acp_service",
     "init_acp_service",

@@ -5,6 +5,7 @@ import { ModelManageModal } from "../modals/ModelManageModal";
 import { useTranslation } from "react-i18next";
 import styles from "../../index.module.less";
 import { ProviderIcon } from "../ProviderIconComponent";
+import { getProviderDisplayName } from "../providerDisplay";
 
 interface LocalProviderCardProps {
   provider: ProviderInfo;
@@ -51,7 +52,9 @@ export const LocalProviderCard = React.memo(function LocalProviderCard({
 
       {/* Title Row */}
       <div className={styles.cardTitleRow}>
-        <span className={styles.cardName}>{provider.name}</span>
+        <span className={styles.cardName}>
+          {getProviderDisplayName(provider.id, provider.name)}
+        </span>
         <span className={styles.localTag}>{t("models.local")}</span>
       </div>
 

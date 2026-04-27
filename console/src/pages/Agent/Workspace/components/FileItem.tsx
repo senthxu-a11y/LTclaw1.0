@@ -1,8 +1,6 @@
 import React from "react";
 import { Switch, Tooltip } from "@agentscope-ai/design";
 import {
-  CaretDownOutlined,
-  CaretRightOutlined,
   HolderOutlined,
 } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
@@ -104,15 +102,6 @@ export const FileItem: React.FC<FileItemProps> = ({
                 onClick={handleToggleClick}
               />
             </Tooltip>
-            {isMemoryFile && (
-              <span className={styles.expandIcon}>
-                {expandedMemory ? (
-                  <CaretDownOutlined />
-                ) : (
-                  <CaretRightOutlined />
-                )}
-              </span>
-            )}
           </div>
         </div>
       </div>

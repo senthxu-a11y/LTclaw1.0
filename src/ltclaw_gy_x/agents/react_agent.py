@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """LTCLAW-GY.X Agent - Main agent implementation.
 
-This module provides the main LTCLAW-GY.XAgent class built on ReActAgent,
+This module provides the main LTClawGYXAgent class built on ReActAgent,
 with integrated tools, skills, and memory management.
 """
 
@@ -76,7 +76,7 @@ logger = logging.getLogger(__name__)
 NamesakeStrategy = Literal["override", "skip", "raise", "rename"]
 
 
-class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
+class LTClawGYXAgent(ToolGuardMixin, ReActAgent):
     """LTCLAW-GY.X Agent with integrated tools, skills, and memory management.
 
     This agent extends ReActAgent with:
@@ -90,7 +90,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
     MRO note
     ~~~~~~~~
     ``ToolGuardMixin`` overrides ``_acting`` and ``_reasoning`` via
-    Python's MRO: LTCLAW-GY.XAgent → ToolGuardMixin → ReActAgent.  If you
+    Python's MRO: LTClawGYXAgent → ToolGuardMixin → ReActAgent.  If you
     add a ``_acting`` or ``_reasoning`` override in this class, you
     **must** call ``super()._acting(...)`` / ``super()._reasoning(...)``
     so the guard interception remains active.
@@ -109,7 +109,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
         task_tracker: Any | None = None,
         plan_notebook: Any | None = None,
     ):
-        """Initialize LTCLAW-GY.XAgent.
+        """Initialize LTClawGYXAgent.
 
         Args:
             agent_config: Agent profile configuration containing all settings
@@ -684,7 +684,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
         inp = tool_call.get("input")
         if not isinstance(inp, dict):
             return
-        for key in LTCLAW-GY.XAgent._PLAN_JSON_KEYS:
+        for key in LTClawGYXAgent._PLAN_JSON_KEYS:
             val = inp.get(key)
             if isinstance(val, str):
                 try:
@@ -1095,7 +1095,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
         round of calls has ended.
         """
         if isinstance(msg.content, str):
-            msg.content += LTCLAW-GY.XAgent._ROUND_END_NOTICE
+            msg.content += LTClawGYXAgent._ROUND_END_NOTICE
             return msg
 
         filtered = [
@@ -1114,7 +1114,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
             )
 
         filtered.append(
-            {"type": "text", "text": LTCLAW-GY.XAgent._ROUND_END_NOTICE},
+            {"type": "text", "text": LTClawGYXAgent._ROUND_END_NOTICE},
         )
         msg.content = filtered
         return msg
@@ -1254,7 +1254,7 @@ class LTCLAW-GY.XAgent(ToolGuardMixin, ReActAgent):
             return msg
 
         # Normal message processing
-        logger.info("LTCLAW-GY.XAgent.reply: max_iters=%s", self.max_iters)
+        logger.info("LTClawGYXAgent.reply: max_iters=%s", self.max_iters)
 
         request_context = getattr(self, "_request_context", {}) or {}
         channel_name = request_context.get("channel", "console")

@@ -254,12 +254,6 @@ export const createColumns = (
       width: 140,
     },
     {
-      title: "DispatchChannel",
-      dataIndex: ["dispatch", "channel"],
-      key: "channel",
-      width: 150,
-    },
-    {
       title: "DispatchTargetUserID",
       dataIndex: ["dispatch", "target", "user_id"],
       key: "target_user_id",

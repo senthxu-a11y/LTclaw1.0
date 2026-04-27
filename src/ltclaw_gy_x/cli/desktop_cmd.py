@@ -8,14 +8,13 @@ import os
 import socket
 import subprocess
 import sys
-import threading
 import time
 import traceback
 import webbrowser
 
 import click
 
-from ..constant import LOG_LEVEL_ENV
+from ..constant import LOG_LEVEL_ENV, WORKING_DIR
 from ..utils.logging import setup_logger
 
 try:
@@ -105,29 +104,6 @@ def _wait_for_http(host: str, port: int, timeout_sec: float = 300.0) -> bool:
         except (OSError, socket.error):
             time.sleep(1)
     return False
-
-
-def _stream_reader(in_stream, out_stream) -> None:
-    """Read from in_stream line by line and write to out_stream.
-
-    Used on Windows to prevent subprocess buffer blocking. Runs in a
-    background thread to continuously drain the subprocess output.
-    """
-    try:
-        for line in iter(in_stream.readline, ""):
-            if not line:
-                break
-            out_stream.write(line)
-            out_stream.flush()
-    except Exception:
-        pass
-    finally:
-        try:
-            in_stream.close()
-        except Exception:
-            pass
-
-
 @click.command("desktop")
 @click.option(
     "--host",
@@ -165,6 +141,8 @@ def desktop_cmd(
 
     env = os.environ.copy()
     env[LOG_LEVEL_ENV] = log_level
+    storage_path = str((WORKING_DIR / ".desktop_webview2").resolve())
+    os.makedirs(storage_path, exist_ok=True)
 
     if "SSL_CERT_FILE" in env:
         cert_file = env["SSL_CERT_FILE"]
@@ -177,7 +155,18 @@ def desktop_cmd(
     else:
         logger.warning("SSL_CERT_FILE not set on environment")
 
-    is_windows = sys.platform == "win32"
+    desktop_log_dir = WORKING_DIR / "desktop_logs"
+    desktop_log_dir.mkdir(parents=True, exist_ok=True)
+    backend_stdout = open(
+        desktop_log_dir / "backend.stdout.log",
+        "a",
+        encoding="utf-8",
+    )
+    backend_stderr = open(
+        desktop_log_dir / "backend.stderr.log",
+        "a",
+        encoding="utf-8",
+    )
     proc = None
     manually_terminated = (
         False  # Track if we intentionally terminated the process
@@ -197,26 +186,13 @@ def desktop_cmd(
                 log_level,
             ],
             stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE if is_windows else sys.stdout,
-            stderr=subprocess.PIPE if is_windows else sys.stderr,
+            stdout=backend_stdout,
+            stderr=backend_stderr,
             env=env,
             bufsize=1,
             universal_newlines=True,
         )
         try:
-            if is_windows:
-                stdout_thread = threading.Thread(
-                    target=_stream_reader,
-                    args=(proc.stdout, sys.stdout),
-                    daemon=True,
-                )
-                stderr_thread = threading.Thread(
-                    target=_stream_reader,
-                    args=(proc.stderr, sys.stderr),
-                    daemon=True,
-                )
-                stdout_thread.start()
-                stderr_thread.start()
             logger.info("Waiting for HTTP ready...")
             if _wait_for_http(host, port):
                 logger.info("HTTP ready, creating webview window...")
@@ -234,6 +210,7 @@ def desktop_cmd(
                 )
                 webview.start(
                     private_mode=False,
+                    storage_path=storage_path,
                 )  # blocks until user closes the window
                 logger.info("webview.start() returned (window closed).")
             else:
@@ -316,3 +293,6 @@ def desktop_cmd(
         traceback.print_exc(file=sys.stderr)
         sys.stderr.flush()
         raise
+    finally:
+        backend_stdout.close()
+        backend_stderr.close()

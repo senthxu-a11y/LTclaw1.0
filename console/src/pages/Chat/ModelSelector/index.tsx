@@ -4,9 +4,7 @@ import { useAppMessage } from "../../../hooks/useAppMessage";
 import {
   CheckOutlined,
   LoadingOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
-import { SparkDownLine } from "@agentscope-ai/icons";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { providerApi } from "../../../api/modules/provider";
@@ -14,6 +12,7 @@ import type { ProviderInfo, ActiveModelsInfo } from "../../../api/types";
 import { useAgentStore } from "../../../stores/agentStore";
 import { confirmFreeModelSwitch } from "@/utils/freeModelSwitchWarning";
 import { ProviderIcon } from "../../Settings/Models/components/ProviderIconComponent";
+import { getProviderDisplayName } from "../../Settings/Models/components/providerDisplay";
 import styles from "./index.module.less";
 
 interface EligibleProvider {
@@ -206,8 +205,9 @@ export default function ModelSelector() {
               ].join(" ")}
             >
               <ProviderIcon providerId={provider.id} size={20} />
-              <span className={styles.providerName}>{provider.name}</span>
-              <RightOutlined className={styles.providerArrow} />
+              <span className={styles.providerName}>
+                {getProviderDisplayName(provider.id, provider.name)}
+              </span>
 
               {/* Level-2 submenu — shown on parent hover via CSS */}
               <div className={`${styles.submenu} modelSubmenu`}>
@@ -258,18 +258,12 @@ export default function ModelSelector() {
           )}
         >
           {saving && (
-            <LoadingOutlined style={{ fontSize: 11, color: "#FF7F16" }} />
+            <LoadingOutlined style={{ fontSize: 11, color: "#6b7280" }} />
           )}
           {showActiveProviderIcon && activeProviderId && (
             <ProviderIcon providerId={activeProviderId} size={16} />
           )}
           <span className={styles.triggerName}>{activeModelName}</span>
-          <SparkDownLine
-            className={[
-              styles.triggerArrow,
-              open ? styles.triggerArrowOpen : "",
-            ].join(" ")}
-          />
         </div>
       </Tooltip>
     </Dropdown>

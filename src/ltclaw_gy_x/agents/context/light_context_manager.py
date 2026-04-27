@@ -34,7 +34,7 @@ from ...config.config import load_agent_config
 from ...constant import MEMORY_COMPACT_KEEP_RECENT, TRUNCATION_NOTICE_MARKER
 
 if TYPE_CHECKING:
-    from ..react_agent import LTCLAW-GY.XAgent
+    from ..react_agent import LTClawGYXAgent
 
 logger = logging.getLogger(__name__)
 
@@ -612,7 +612,7 @@ class LightContextManager(BaseContextManager):
     # ------------------------------------------------------------------
 
     @staticmethod
-    async def _print_status_message(agent: "LTCLAW-GY.XAgent", text: str) -> None:
+    async def _print_status_message(agent: "LTClawGYXAgent", text: str) -> None:
         msg = Msg(
             name=agent.name,
             role="assistant",
@@ -622,7 +622,7 @@ class LightContextManager(BaseContextManager):
 
     async def pre_reply(
         self,
-        agent: "LTCLAW-GY.XAgent",
+        agent: "LTClawGYXAgent",
         kwargs: dict[str, Any],
     ) -> dict[str, Any] | None:
         """Augment ``msg`` with retrieved memory results before reply.
@@ -673,7 +673,7 @@ class LightContextManager(BaseContextManager):
 
     async def pre_reasoning(
         self,
-        agent: "LTCLAW-GY.XAgent",
+        agent: "LTClawGYXAgent",
         kwargs: dict[str, Any],
     ) -> dict[str, Any] | None:
         """Check context size and compact memory when threshold is exceeded.
@@ -898,7 +898,7 @@ class LightContextManager(BaseContextManager):
 
     async def post_acting(
         self,
-        agent: "LTCLAW-GY.XAgent",
+        agent: "LTClawGYXAgent",
         kwargs: dict[str, Any],
         output: Any,
     ) -> Msg | None:
@@ -930,7 +930,7 @@ class LightContextManager(BaseContextManager):
 
     async def post_reply(
         self,
-        agent: "LTCLAW-GY.XAgent",
+        agent: "LTClawGYXAgent",
         kwargs: dict[str, Any],
         output: Any,
     ) -> Msg | None:

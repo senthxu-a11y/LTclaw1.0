@@ -60,9 +60,8 @@ from ..providers.provider import Provider
 # Log file opened on app startup (see ``ltclaw_gy_x.app._app`` lifespan).
 APP_LOG_BASENAME = LOG_FILE_BASENAME
 
-# Built-in local llama.cpp provider id; legacy configs may still use
-# ltclaw_gy_x-local.
-_QWENPAW_LOCAL_PROVIDER_IDS = frozenset({"ltclaw_gy_x-local", "ltclaw_gy_x-local"})
+# Built-in local llama.cpp provider id plus the older alias.
+_QWENPAW_LOCAL_PROVIDER_IDS = frozenset({"ltclaw_gy_x-local", "ltclaw-local"})
 
 
 def _resolve_existing_path_anchor(path: Path) -> Path | None:

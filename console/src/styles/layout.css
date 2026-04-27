@@ -154,7 +154,7 @@ html.dark-mode .ant-table-tbody > tr:hover > td {
 
 html.dark-mode .qwenpaw-table-tbody > tr.qwenpaw-table-row-selected > td,
 html.dark-mode .ant-table-tbody > tr.ant-table-row-selected > td {
-  background: rgba(97, 92, 237, 0.12) !important;
+  background: rgba(107, 114, 128, 0.18) !important;
 }
 
 /* Table fixed columns shadow in dark mode */
@@ -182,8 +182,8 @@ html.dark-mode .ant-pagination .ant-pagination-item a {
 
 html.dark-mode .qwenpaw-pagination .qwenpaw-pagination-item-active,
 html.dark-mode .ant-pagination .ant-pagination-item-active {
-  background: #ff7f16 !important;
-  border-color: #ff7f16 !important;
+  background: #6b7280 !important;
+  border-color: #6b7280 !important;
 }
 
 html.dark-mode .qwenpaw-pagination .qwenpaw-pagination-item-active a,
@@ -210,7 +210,7 @@ html.dark-mode .qwenpaw-table-column-sorter-up.active,
 html.dark-mode .qwenpaw-table-column-sorter-down.active,
 html.dark-mode .ant-table-column-sorter-up.active,
 html.dark-mode .ant-table-column-sorter-down.active {
-  color: #ff7f16 !important;
+  color: #9ca3af !important;
 }
 
 /* Checkbox in table */
@@ -222,8 +222,8 @@ html.dark-mode .ant-checkbox-inner {
 
 html.dark-mode .qwenpaw-checkbox-checked .qwenpaw-checkbox-inner,
 html.dark-mode .ant-checkbox-checked .ant-checkbox-inner {
-  background: #ff7f16 !important;
-  border-color: #ff7f16 !important;
+  background: #6b7280 !important;
+  border-color: #6b7280 !important;
 }
 
 /* Page titles (h1) */
@@ -310,13 +310,13 @@ html.dark-mode .ant-select-item-empty {
 
 html.dark-mode .qwenpaw-select-item-option-active,
 html.dark-mode .ant-select-item-option-active {
-  background: rgba(97, 92, 237, 0.12) !important;
+  background: rgba(107, 114, 128, 0.14) !important;
 }
 
 html.dark-mode .qwenpaw-select-item-option-selected,
 html.dark-mode .ant-select-item-option-selected {
-  background: rgba(97, 92, 237, 0.2) !important;
-  color: #ff7f16 !important;
+  background: rgba(107, 114, 128, 0.2) !important;
+  color: #d1d5db !important;
 }
 
 /* Form labels */
@@ -396,8 +396,8 @@ html.dark-mode
 html.dark-mode
   .ant-picker-time-panel-cell-selected
   .ant-picker-time-panel-cell-inner {
-  background: rgba(97, 92, 237, 0.2) !important;
-  color: #ff7f16 !important;
+  background: rgba(107, 114, 128, 0.2) !important;
+  color: #d1d5db !important;
 }
 
 /* DatePicker / RangePicker calendar panel */
@@ -452,7 +452,7 @@ html.dark-mode .ant-picker-cell .ant-picker-cell-inner {
 
 html.dark-mode .qwenpaw-picker-cell:hover .qwenpaw-picker-cell-inner,
 html.dark-mode .ant-picker-cell:hover .ant-picker-cell-inner {
-  background: rgba(97, 92, 237, 0.2) !important;
+  background: rgba(107, 114, 128, 0.2) !important;
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
@@ -467,7 +467,7 @@ html.dark-mode .ant-picker-cell-disabled {
 /* Today marker */
 html.dark-mode .qwenpaw-picker-cell-today .qwenpaw-picker-cell-inner::before,
 html.dark-mode .ant-picker-cell-today .ant-picker-cell-inner::before {
-  border-color: #ff7f16 !important;
+  border-color: #9ca3af !important;
 }
 
 /* Selected start/end cell */
@@ -477,14 +477,14 @@ html.dark-mode .qwenpaw-picker-cell-range-start .qwenpaw-picker-cell-inner,
 html.dark-mode .ant-picker-cell-range-start .ant-picker-cell-inner,
 html.dark-mode .qwenpaw-picker-cell-range-end .qwenpaw-picker-cell-inner,
 html.dark-mode .ant-picker-cell-range-end .ant-picker-cell-inner {
-  background: #ff7f16 !important;
+  background: #6b7280 !important;
   color: #fff !important;
 }
 
 /* Range in-between cells */
 html.dark-mode .qwenpaw-picker-cell-in-range::before,
 html.dark-mode .ant-picker-cell-in-range::before {
-  background: rgba(97, 92, 237, 0.15) !important;
+  background: rgba(107, 114, 128, 0.15) !important;
 }
 
 html.dark-mode .qwenpaw-picker-cell-in-range .qwenpaw-picker-cell-inner,
@@ -503,7 +503,7 @@ html.dark-mode
 html.dark-mode
   .qwenpaw-picker-cell-in-view.qwenpaw-picker-cell-range-hover-end::after,
 html.dark-mode .ant-picker-cell-in-view.ant-picker-cell-range-hover-end::after {
-  border-color: #ff7f16 !important;
+  border-color: #9ca3af !important;
 }
 
 /* Panel footer (OK button area) */
@@ -515,7 +515,7 @@ html.dark-mode .ant-picker-footer {
 
 html.dark-mode .qwenpaw-picker-today-btn,
 html.dark-mode .ant-picker-today-btn {
-  color: #ff7f16 !important;
+  color: #d1d5db !important;
 }
 
 /* Divider between two panels in RangePicker */
@@ -673,12 +673,12 @@ html.dark-mode .ant-slider-rail {
 
 html.dark-mode .qwenpaw-slider-track,
 html.dark-mode .ant-slider-track {
-  background-color: #ff7f16 !important;
+  background-color: #6b7280 !important;
 }
 
 html.dark-mode .qwenpaw-slider-mark-text,
 html.dark-mode .ant-slider-mark-text {
-  color: #ff7f16 !important;
+  color: #d1d5db !important;
 }
 
 html.dark-mode .qwenpaw-form-item-label > label .qwenpaw-form-item-tooltip,
@@ -688,7 +688,7 @@ html.dark-mode .ant-form-item-label > label .ant-form-item-tooltip {
 
 html.dark-mode .qwenpaw-slider-handle::after,
 html.dark-mode .ant-slider-handle::after {
-  box-shadow: 0 0 0 2px #ff7f16 !important;
+  box-shadow: 0 0 0 2px #9ca3af !important;
   background-color: #1f1f1f !important;
 }
 
@@ -797,7 +797,7 @@ html.dark-mode [class*="chat-anywhere"] [class*="message"] code {
 }
 
 html.dark-mode [class*="chat-anywhere"] [class*="message"] a {
-  color: #ff7f16 !important;
+  color: #d1d5db !important;
 }
 
 #root {
@@ -855,26 +855,30 @@ html.dark-mode .qwenpaw-sender-content {
 
 /* Menu background in light mode */
 .qwenpaw-menu,
-.ant-menu {
+.ant-menu,
+.ltclaw_gy_x-menu {
   background: #f9f8f4 !important;
 }
 
 /* Menu selected item in light mode */
 .qwenpaw-menu-item-selected,
-.ant-menu-item-selected {
-  background: rgba(43, 18, 0, 0.08) !important;
-  color: inherit !important;
+.ant-menu-item-selected,
+.ltclaw_gy_x-menu-item-selected {
+  background: rgba(107, 114, 128, 0.14) !important;
+  color: #374151 !important;
 }
 
 /* Hide submenu arrow in light mode */
 .qwenpaw-menu-submenu-arrow,
-.ant-menu-submenu-arrow {
+.ant-menu-submenu-arrow,
+.ltclaw_gy_x-menu-submenu-arrow {
   display: none !important;
 }
 
 /* Group title (一级菜单) in light mode */
 .qwenpaw-menu-submenu-title,
-.ant-menu-submenu-title {
+.ant-menu-submenu-title,
+.ltclaw_gy_x-menu-submenu-title {
   font-family: "PingFang SC", sans-serif !important;
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -885,14 +889,16 @@ html.dark-mode .qwenpaw-sender-content {
 
 /* Remove submenu indent - align with parent in light mode */
 .qwenpaw-menu-submenu .qwenpaw-menu-item,
-.ant-menu-submenu .ant-menu-item {
+.ant-menu-submenu .ant-menu-item,
+.ltclaw_gy_x-menu-submenu .ltclaw_gy_x-menu-item {
   padding-left: 12px !important;
 }
 
 /* Selected submenu item - keep text color unchanged in light mode */
 .qwenpaw-menu-submenu .qwenpaw-menu-item-selected,
-.ant-menu-submenu .ant-menu-item-selected {
-  color: inherit !important;
+.ant-menu-submenu .ant-menu-item-selected,
+.ltclaw_gy_x-menu-submenu .ltclaw_gy_x-menu-item-selected {
+  color: #374151 !important;
 }
 
 .page-container {
@@ -970,6 +976,103 @@ html.dark-mode .qwenpaw-sender-content {
   margin-left: 0 !important;
 }
 
+/* Global primary buttons */
+.ant-btn-primary,
+.qwenpaw-btn-primary {
+  background: #6b7280 !important;
+  border-color: #6b7280 !important;
+  box-shadow: 0 6px 14px rgba(107, 114, 128, 0.18) !important;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus,
+.qwenpaw-btn-primary:hover,
+.qwenpaw-btn-primary:focus {
+  background: #4b5563 !important;
+  border-color: #4b5563 !important;
+  box-shadow: 0 8px 18px rgba(75, 85, 99, 0.22) !important;
+}
+
+.ant-btn-primary:active,
+.qwenpaw-btn-primary:active {
+  background: #374151 !important;
+  border-color: #374151 !important;
+}
+
+html.dark-mode .ant-btn-primary,
+html.dark-mode .qwenpaw-btn-primary {
+  background: linear-gradient(180deg, #7c8593 0%, #687180 100%) !important;
+  border-color: #7c8593 !important;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24) !important;
+}
+
+html.dark-mode .ant-btn-primary:hover,
+html.dark-mode .ant-btn-primary:focus,
+html.dark-mode .qwenpaw-btn-primary:hover,
+html.dark-mode .qwenpaw-btn-primary:focus {
+  background: linear-gradient(180deg, #8b95a5 0%, #707a89 100%) !important;
+  border-color: #8b95a5 !important;
+}
+
+html.dark-mode .ant-btn-primary:active,
+html.dark-mode .qwenpaw-btn-primary:active {
+  background: #5f6774 !important;
+  border-color: #5f6774 !important;
+}
+
+/* Global tabs */
+.ant-tabs-nav,
+.qwenpaw-tabs-nav {
+  margin-bottom: 16px !important;
+}
+
+.ant-tabs-tab,
+.qwenpaw-tabs-tab {
+  border-radius: 10px 10px 0 0 !important;
+  background: rgba(148, 163, 184, 0.12) !important;
+  border-color: rgba(107, 114, 128, 0.12) !important;
+  color: #4b5563 !important;
+}
+
+.ant-tabs-tab:hover,
+.qwenpaw-tabs-tab:hover {
+  color: #374151 !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active,
+.qwenpaw-tabs-tab.qwenpaw-tabs-tab-active {
+  background: linear-gradient(180deg, #f5f5f4 0%, #eceff1 100%) !important;
+  border-color: rgba(107, 114, 128, 0.18) !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+.qwenpaw-tabs-tab.qwenpaw-tabs-tab-active .qwenpaw-tabs-tab-btn {
+  color: #111827 !important;
+}
+
+.ant-tabs-ink-bar,
+.qwenpaw-tabs-ink-bar {
+  background: #6b7280 !important;
+}
+
+html.dark-mode .ant-tabs-tab,
+html.dark-mode .qwenpaw-tabs-tab {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+html.dark-mode .ant-tabs-tab.ant-tabs-tab-active,
+html.dark-mode .qwenpaw-tabs-tab.qwenpaw-tabs-tab-active {
+  background: linear-gradient(180deg, #3b4048 0%, #31353d 100%) !important;
+  border-color: rgba(159, 168, 182, 0.32) !important;
+}
+
+html.dark-mode .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+html.dark-mode .qwenpaw-tabs-tab.qwenpaw-tabs-tab-active .qwenpaw-tabs-tab-btn {
+  color: #f9fafb !important;
+}
+
 /* ─── Global disabled button styles ────────────────────────────────────────── */
 /* Primary button disabled state - must show border and gray background */
 .ant-btn-primary:disabled,
@@ -1002,9 +1105,9 @@ html.dark-mode .qwenpaw-btn-primary.qwenpaw-btn-disabled {
 /* Dark mode - default button */
 html.dark-mode .ant-btn-default,
 html.dark-mode .qwenpaw-btn-default {
-  color: rgba(255, 235, 218, 0.88) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
   background-color: #000000 !important;
-  border: 1px solid #3a312a !important;
+  border: 1px solid #3f3f46 !important;
 }
 
 /* Dark mode - danger button */
@@ -1075,22 +1178,145 @@ html.dark-mode .debug-log-path strong {
 .logoText {
   font-size: 18px;
   font-weight: 700;
-  color: #FF7F16;
+  color: #4b5563;
   letter-spacing: 0.5px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .logoVersion {
   font-size: 11px;
-  color: rgba(255, 157, 77, 0.7);
+  color: rgba(107, 114, 128, 0.75);
   margin-left: 8px;
   vertical-align: middle;
 }
 
 html.dark-mode .logoText {
-  color: #FF9F4A;
+  color: #d1d5db;
 }
 
 html.dark-mode .logoVersion {
-  color: rgba(255, 159, 74, 0.7);
+  color: rgba(156, 163, 175, 0.75);
+}
+
+/* Sidebar menu final overrides: keep layout.css from repainting sidebar blue */
+.ant-layout-sider .qwenpaw-menu,
+.ant-layout-sider .ant-menu,
+.ant-layout-sider .ltclaw_gy_x-menu,
+.ant-layout-sider .qwenpaw-menu-root,
+.ant-layout-sider .ant-menu-root,
+.ant-layout-sider .ltclaw_gy_x-menu-root,
+.ant-layout-sider .qwenpaw-menu-sub,
+.ant-layout-sider .ant-menu-sub,
+.ant-layout-sider .ltclaw_gy_x-menu-sub,
+.ant-layout-sider .qwenpaw-menu-inline,
+.ant-layout-sider .ant-menu-inline,
+.ant-layout-sider .ltclaw_gy_x-menu-inline,
+.ant-layout-sider .qwenpaw-menu-submenu,
+.ant-layout-sider .ant-menu-submenu,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu,
+.ant-layout-sider .qwenpaw-menu-submenu > .qwenpaw-menu,
+.ant-layout-sider .ant-menu-submenu > .ant-menu,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu > .ltclaw_gy_x-menu {
+  background: transparent !important;
+}
+
+.ant-layout-sider .qwenpaw-menu-submenu-title,
+.ant-layout-sider .ant-menu-submenu-title,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu-title {
+  background: transparent !important;
+  color: rgba(31, 41, 55, 0.42) !important;
+  font-weight: 600 !important;
+  margin: 8px 0 6px !important;
+}
+
+.ant-layout-sider .qwenpaw-menu-submenu-arrow,
+.ant-layout-sider .ant-menu-submenu-arrow,
+.ant-layout-sider .qwenpaw-menu-submenu-expand-icon,
+.ant-layout-sider .ant-menu-submenu-expand-icon,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu-arrow,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu-expand-icon {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.ant-layout-sider .qwenpaw-menu-item,
+.ant-layout-sider .ant-menu-item,
+.ant-layout-sider .ltclaw_gy_x-menu-item {
+  background: transparent !important;
+  color: #2f3743 !important;
+  border-radius: 10px !important;
+  min-height: 42px !important;
+  line-height: 42px !important;
+  margin: 4px 0 !important;
+}
+
+.ant-layout-sider .qwenpaw-menu-item:hover,
+.ant-layout-sider .ant-menu-item:hover,
+.ant-layout-sider .ltclaw_gy_x-menu-item:hover {
+  background: rgba(107, 114, 128, 0.14) !important;
+  color: #1f2937 !important;
+}
+
+.ant-layout-sider .qwenpaw-menu-item-selected,
+.ant-layout-sider .ant-menu-item-selected,
+.ant-layout-sider .qwenpaw-menu-submenu .qwenpaw-menu-item-selected,
+.ant-layout-sider .ant-menu-submenu .ant-menu-item-selected,
+.ant-layout-sider .ltclaw_gy_x-menu-item-selected,
+.ant-layout-sider .ltclaw_gy_x-menu-submenu .ltclaw_gy_x-menu-item-selected {
+  background: #7a7a7a !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html.dark-mode .ant-layout-sider .qwenpaw-menu,
+html.dark-mode .ant-layout-sider .ant-menu,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-root,
+html.dark-mode .ant-layout-sider .ant-menu-root,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-root,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-sub,
+html.dark-mode .ant-layout-sider .ant-menu-sub,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-sub,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-inline,
+html.dark-mode .ant-layout-sider .ant-menu-inline,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-inline,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-submenu,
+html.dark-mode .ant-layout-sider .ant-menu-submenu,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-submenu,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-submenu > .qwenpaw-menu,
+html.dark-mode .ant-layout-sider .ant-menu-submenu > .ant-menu,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-submenu > .ltclaw_gy_x-menu {
+  background: transparent !important;
+}
+
+html.dark-mode .ant-layout-sider .qwenpaw-menu-submenu-title,
+html.dark-mode .ant-layout-sider .ant-menu-submenu-title,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-submenu-title {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+html.dark-mode .ant-layout-sider .qwenpaw-menu-item,
+html.dark-mode .ant-layout-sider .ant-menu-item,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-item {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+html.dark-mode .ant-layout-sider .qwenpaw-menu-item:hover,
+html.dark-mode .ant-layout-sider .ant-menu-item:hover,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-item:hover {
+  background: rgba(148, 163, 184, 0.14) !important;
+  color: #ffffff !important;
+}
+
+html.dark-mode .ant-layout-sider .qwenpaw-menu-item-selected,
+html.dark-mode .ant-layout-sider .ant-menu-item-selected,
+html.dark-mode .ant-layout-sider .qwenpaw-menu-submenu .qwenpaw-menu-item-selected,
+html.dark-mode .ant-layout-sider .ant-menu-submenu .ant-menu-item-selected,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-item-selected,
+html.dark-mode .ant-layout-sider .ltclaw_gy_x-menu-submenu .ltclaw_gy_x-menu-item-selected {
+  background: #6e6e6e !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
 }

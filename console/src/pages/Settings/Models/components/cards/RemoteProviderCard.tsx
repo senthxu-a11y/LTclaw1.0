@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useAppMessage } from "../../../../../hooks/useAppMessage";
 import styles from "../../index.module.less";
 import { ProviderIcon } from "../ProviderIconComponent";
+import { getProviderDisplayName } from "../providerDisplay";
 
 interface RemoteProviderCardProps {
   provider: ProviderInfo;
@@ -85,12 +86,12 @@ export const RemoteProviderCard = React.memo(function RemoteProviderCard({
   const statusDotColor = isAvailable
     ? "rgba(20, 184, 166, 1)"
     : isConfigured
-    ? "#faad14"
+    ? "#9ca3af"
     : "#d9d9d9";
   const statusDotShadow = isAvailable
     ? "0 0 0 2px rgba(82, 196, 26, 0.2)"
     : isConfigured
-    ? "0 0 0 2px rgba(250, 173, 20, 0.2)"
+    ? "0 0 0 2px rgba(156, 163, 175, 0.24)"
     : "none";
 
   return (
@@ -122,7 +123,9 @@ export const RemoteProviderCard = React.memo(function RemoteProviderCard({
 
       {/* Title Row */}
       <div className={styles.cardTitleRow}>
-        <span className={styles.cardName}>{provider.name}</span>
+        <span className={styles.cardName}>
+          {getProviderDisplayName(provider.id, provider.name)}
+        </span>
         {providerTag}
       </div>
 

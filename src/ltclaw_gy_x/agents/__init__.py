@@ -5,28 +5,28 @@ This module provides the main agent implementation and supporting utilities
 for building AI agents with tools, skills, and memory management.
 
 Public API:
-- LTCLAW-GY.XAgent: Main agent class
+- LTClawGYXAgent: Main agent class
 - create_model_and_formatter: Factory for creating models and formatters
 
 Example:
-    >>> from ltclaw_gy_x.agents import LTCLAW-GY.XAgent, create_model_and_formatter
-    >>> agent = LTCLAW-GY.XAgent()
+    >>> from ltclaw_gy_x.agents import LTClawGYXAgent, create_model_and_formatter
+    >>> agent = LTClawGYXAgent()
     >>> # Or with custom model
     >>> model, formatter = create_model_and_formatter()
 """
 
-# LTCLAW-GY.XAgent is lazy-loaded so that importing agents.skills_manager (e.g.
+# LTClawGYXAgent is lazy-loaded so that importing agents.skills_manager (e.g.
 # from CLI init_cmd/skills_cmd) does not pull react_agent, agentscope, tools.
 # pylint: disable=undefined-all-variable
-__all__ = ["LTCLAW-GY.XAgent", "create_model_and_formatter"]
+__all__ = ["LTClawGYXAgent", "create_model_and_formatter"]
 
 
 def __getattr__(name: str):
     """Lazy load heavy imports."""
-    if name == "LTCLAW-GY.XAgent":
-        from .react_agent import LTCLAW-GY.XAgent
+    if name == "LTClawGYXAgent":
+        from .react_agent import LTClawGYXAgent
 
-        return LTCLAW-GY.XAgent
+        return LTClawGYXAgent
     if name == "create_model_and_formatter":
         from .model_factory import create_model_and_formatter
 

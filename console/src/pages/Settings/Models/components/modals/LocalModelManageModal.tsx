@@ -30,6 +30,7 @@ import styles from "../../index.module.less";
 import { JsonConfigEditor } from "./JsonConfigEditor.tsx";
 import { LocalModelRow } from "./local-models/LocalModelRow";
 import { LocalRuntimePanel } from "./local-models/LocalRuntimePanel";
+import { getProviderDisplayName } from "../providerDisplay";
 import {
   formatProgressText,
   getProgressPercent,
@@ -854,7 +855,9 @@ export function LocalModelManageModal({
 
   return (
     <Modal
-      title={t("models.localModelsTitle", { provider: provider.name })}
+        title={t("models.localModelsTitle", {
+          provider: getProviderDisplayName(provider.id, provider.name),
+        })}
       open={open}
       onCancel={handleClose}
       footer={null}
@@ -920,7 +923,7 @@ export function LocalModelManageModal({
                         percent={currentModelDownloadPercent ?? 0}
                         showInfo={false}
                         status="active"
-                        strokeColor="#ff7f16"
+                        strokeColor="#9ca3af"
                         strokeWidth={10}
                       />
                       <Tooltip title={t("models.localCancelDownloadAction")}>

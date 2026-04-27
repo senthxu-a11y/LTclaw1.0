@@ -324,7 +324,7 @@ def _get_msg_text(msg: Any) -> str:
     return ""
 
 
-class LTCLAW-GY.XACPAgent(Agent):
+class LTClawGYXACPAgent(Agent):
     """ACP Agent backed by a full ``Workspace``.
 
     Instead of creating a bare ``AgentRunner``, this class boots a
@@ -892,7 +892,7 @@ async def run_ltclaw_gy_x_agent(
     workspace_dir: Path | None = None,
 ) -> None:
     """Entry point: run LTCLAW-GY.X as an ACP agent over stdio."""
-    agent = LTCLAW-GY.XACPAgent(
+    agent = LTClawGYXACPAgent(
         agent_id=agent_id,
         workspace_dir=workspace_dir,
     )

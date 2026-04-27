@@ -15,9 +15,9 @@
 
   &:hover,
   &.triggerActive {
-    border-color: #ff7f16;
-    color: #ff7f16;
-    box-shadow: 0 2px 8px rgba(97, 92, 237, 0.12);
+    border-color: #9ca3af;
+    color: #4b5563;
+    box-shadow: 0 2px 8px rgba(156, 163, 175, 0.18);
   }
 }
 
@@ -29,17 +29,7 @@
 }
 
 .triggerArrow {
-  flex-shrink: 0;
-  font-size: 18px;
-  color: #999;
-  transition:
-    transform 0.2s,
-    color 0.15s;
-
-  &.triggerArrowOpen {
-    transform: rotate(180deg);
-    color: #ff7f16;
-  }
+  display: none;
 }
 
 .providerIcon {
@@ -73,8 +63,8 @@
   gap: 8px;
 
   &:hover {
-    background: rgba(97, 92, 237, 0.06);
-    color: #ff7f16;
+    background: rgba(107, 114, 128, 0.08);
+    color: #4b5563;
   }
 
   &:hover :global(.modelSubmenu) {
@@ -114,9 +104,7 @@
 }
 
 .providerArrow {
-  flex-shrink: 0;
-  font-size: 14px;
-  color: #bbb;
+  display: none;
 }
 
 /* ---- Level-2 submenu ---- */
@@ -149,8 +137,8 @@
   white-space: nowrap;
 
   &:hover {
-    background: rgba(97, 92, 237, 0.06);
-    color: #ff7f16;
+    background: rgba(107, 114, 128, 0.08);
+    color: #4b5563;
   }
 
   &:first-child {
@@ -162,8 +150,8 @@
   }
 
   &.modelItemActive {
-    background: rgba(97, 92, 237, 0.08);
-    color: #ff7f16;
+    background: rgba(107, 114, 128, 0.12);
+    color: #374151;
     font-weight: 500;
   }
 }
@@ -177,7 +165,7 @@
 .checkIcon {
   flex-shrink: 0;
   font-size: 16px;
-  color: #ff7f16;
+  color: #6b7280;
 }
 
 .emptyTip {
@@ -198,16 +186,8 @@
 
     &:hover,
     &.triggerActive {
-      color: #ff7f16;
-      box-shadow: 0 2px 8px rgba(97, 92, 237, 0.2);
-    }
-  }
-
-  .triggerArrow {
-    color: rgba(255, 255, 255, 0.3);
-
-    &.triggerArrowOpen {
-      color: #ff7f16;
+      color: #d1d5db;
+      box-shadow: 0 2px 8px rgba(107, 114, 128, 0.24);
     }
   }
 
@@ -221,13 +201,9 @@
     color: rgba(255, 255, 255, 0.85);
 
     &:hover {
-      background: rgba(97, 92, 237, 0.15);
-      color: #ff7f16;
+      background: rgba(148, 163, 184, 0.14);
+      color: #d1d5db;
     }
-  }
-
-  .providerArrow {
-    color: rgba(255, 255, 255, 0.2);
   }
 
   .submenu {
@@ -240,18 +216,18 @@
     color: rgba(255, 255, 255, 0.85);
 
     &:hover {
-      background: rgba(97, 92, 237, 0.15);
-      color: #ff7f16;
+      background: rgba(148, 163, 184, 0.14);
+      color: #d1d5db;
     }
 
     &.modelItemActive {
-      background: rgba(97, 92, 237, 0.18);
-      color: #ff7f16;
+      background: rgba(148, 163, 184, 0.2);
+      color: #f3f4f6;
     }
   }
 
   .checkIcon {
-    color: #ff7f16;
+    color: #9ca3af;
   }
 
   .emptyTip {

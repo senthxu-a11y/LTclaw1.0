@@ -278,7 +278,7 @@ async def _check_active_llm(
 
     deep_notes: list[str] = []
     pid = (slot.provider_id or "").strip()
-    if deep and pid in ("ltclaw_gy_x-local", "ltclaw_gy_x-local"):
+    if deep and pid in ("ltclaw_gy_x-local", "ltclaw-local"):
         deep_notes = ltclaw_gy_x_local_llm_deep_notes()
 
     if not getattr(provider, "support_connection_check", True):
@@ -299,7 +299,7 @@ async def _check_active_llm(
             "ollama",
             "lmstudio",
             "ltclaw_gy_x-local",
-            "ltclaw_gy_x-local",
+            "ltclaw-local",
         ):
             hint = active_llm_local_failure_hint(provider, slot.provider_id)
             if hint:

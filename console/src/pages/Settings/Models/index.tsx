@@ -146,9 +146,19 @@ function ModelsPage() {
 
               {localProviders.length > 0 && (
                 <div className={styles.providerGroup}>
-                  {/* <h4 className={styles.providerGroupTitle}>
-                  {t("models.localEmbedded")}
-                </h4> */}
+                  <div className={styles.localProviderHeader}>
+                    <div className={styles.providerGroupTitle}>
+                      {t("models.localRuntimeTitle", {
+                        defaultValue: "llama.cpp Local",
+                      })}
+                    </div>
+                    <p className={styles.localProviderDescription}>
+                      {t("models.localRuntimeDescription", {
+                        defaultValue:
+                          "Run recommended local models on this device without configuring an API key.",
+                      })}
+                    </p>
+                  </div>
                   <div className={styles.providerCards}>
                     {renderProviderCards(localProviders)}
                   </div>

@@ -14,7 +14,6 @@ import styles from "../index.module.less";
 import Chat from "../../pages/Chat";
 
 // All other pages are lazily loaded with automatic retry on chunk failure
-const ChannelsPage = lazyImportWithRetry("../../pages/Control/Channels");
 const SessionsPage = lazyImportWithRetry("../../pages/Control/Sessions");
 const CronJobsPage = lazyImportWithRetry("../../pages/Control/CronJobs");
 const HeartbeatPage = lazyImportWithRetry("../../pages/Control/Heartbeat");
@@ -43,7 +42,6 @@ const { Content } = Layout;
 
 const pathToKey: Record<string, string> = {
   "/chat": "chat",
-  "/channels": "channels",
   "/sessions": "sessions",
   "/cron-jobs": "cron-jobs",
   "/heartbeat": "heartbeat",
@@ -102,7 +100,10 @@ export default function MainLayout() {
                 <Routes>
                   <Route path="/" element={<Navigate to="/chat" replace />} />
                   <Route path="/chat/*" element={<Chat />} />
-                  <Route path="/channels" element={<ChannelsPage />} />
+                  <Route
+                    path="/channels"
+                    element={<Navigate to="/chat" replace />}
+                  />
                   <Route path="/sessions" element={<SessionsPage />} />
                   <Route path="/cron-jobs" element={<CronJobsPage />} />
                   <Route path="/heartbeat" element={<HeartbeatPage />} />

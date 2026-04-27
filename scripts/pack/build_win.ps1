@@ -158,7 +158,7 @@ if (Test-Path $pythonExe) {
 }
 
 # Main launcher .bat (will be hidden by VBS)
-$LauncherBat = Join-Path $EnvRoot "QwenPaw Desktop.bat"
+$LauncherBat = Join-Path $EnvRoot "LTCLAW-GY.X Desktop.bat"
 @"
 @echo off
 cd /d "%~dp0"
@@ -194,7 +194,7 @@ if not exist "%USERPROFILE%\.qwenpaw\config.json" (
 "@ | Set-Content -Path $LauncherBat -Encoding ASCII
 
 # Debug launcher .bat (shows console)
-$DebugBat = Join-Path $EnvRoot "QwenPaw Desktop (Debug).bat"
+$DebugBat = Join-Path $EnvRoot "LTCLAW-GY.X Desktop (Debug).bat"
 @"
 @echo off
 cd /d "%~dp0"
@@ -224,7 +224,7 @@ if defined CERT_FILE (
 )
 
 echo ====================================
-echo QwenPaw Desktop - Debug Mode
+echo LTCLAW-GY.X Desktop - Debug Mode
 echo ====================================
 echo Working Directory: %cd%
 echo Python: "%~dp0python.exe"
@@ -239,20 +239,20 @@ if not exist "%USERPROFILE%\.qwenpaw\config.json" (
   echo [Init] Creating config...
   "%~dp0python.exe" -u -m qwenpaw init --defaults --accept-security
 )
-echo [Launch] Starting QwenPaw Desktop with log-level=%QWENPAW_LOG_LEVEL%...
+echo [Launch] Starting LTCLAW-GY.X Desktop with log-level=%QWENPAW_LOG_LEVEL%...
 echo Press Ctrl+C to stop
 echo.
 "%~dp0python.exe" -u -m qwenpaw desktop --log-level %QWENPAW_LOG_LEVEL%
 echo.
-echo [Exit] QwenPaw Desktop closed
+echo [Exit] LTCLAW-GY.X Desktop closed
 pause
 "@ | Set-Content -Path $DebugBat -Encoding ASCII
 
 # VBScript launcher (no console window)
-$LauncherVbs = Join-Path $EnvRoot "QwenPaw Desktop.vbs"
+$LauncherVbs = Join-Path $EnvRoot "LTCLAW-GY.X Desktop.vbs"
 @"
 Set WshShell = CreateObject("WScript.Shell")
-batPath = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName) & "\QwenPaw Desktop.bat"
+batPath = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName) & "\LTCLAW-GY.X Desktop.bat"
 WshShell.Run Chr(34) & batPath & Chr(34), 0, False
 Set WshShell = Nothing
 "@ | Set-Content -Path $LauncherVbs -Encoding ASCII

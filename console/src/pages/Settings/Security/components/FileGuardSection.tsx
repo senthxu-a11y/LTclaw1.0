@@ -113,13 +113,13 @@ export function FileGuardSection({ onSave }: FileGuardSectionProps = {}) {
         return (
           <Space>
             {isDir ? (
-              <FolderOutlined style={{ color: "#faad14" }} />
+              <FolderOutlined style={{ color: "#6b7280" }} />
             ) : (
               <FileOutlined style={{ color: "#1890ff" }} />
             )}
             <code>{path}</code>
             {isDir && (
-              <Tag color="orange">{t("security.fileGuard.directory")}</Tag>
+              <Tag color="default">{t("security.fileGuard.directory")}</Tag>
             )}
           </Space>
         );

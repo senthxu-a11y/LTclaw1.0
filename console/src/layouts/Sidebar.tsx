@@ -15,7 +15,6 @@ import { useAppMessage } from "../hooks/useAppMessage";
 import AgentSelector from "../components/AgentSelector";
 import {
   SparkChatTabFill,
-  SparkWifiLine,
   SparkUserGroupLine,
   SparkDateLine,
   SparkVoiceChat01Line,
@@ -29,7 +28,6 @@ import {
   SparkScanLine,
   SparkToolLine,
   SparkDataLine,
-  SparkMicLine,
   SparkAgentLine,
   SparkExitFullscreenLine,
   SparkSearchUserLine,
@@ -199,13 +197,12 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       path: "/mcp",
       label: t("nav.mcp"),
     },
-    // ACP hidden for LTCLAW-GY.X local deployment
-    // {
-    //   key: "acp",
-    //   icon: <SparkScanLine size={18} />,
-    //   path: "/acp",
-    //   label: t("nav.acp"),
-    // },
+    {
+      key: "acp",
+      icon: <SparkScanLine size={18} />,
+      path: "/acp",
+      label: t("nav.acp"),
+    },
     {
       key: "agent-config",
       icon: <SparkModifyLine size={18} />,
@@ -289,11 +286,6 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       label: collapsed ? null : t("nav.control"),
       children: [
         {
-          key: "channels",
-          label: collapsed ? null : t("nav.channels"),
-          icon: <SparkWifiLine size={16} />,
-        },
-        {
           key: "sessions",
           label: collapsed ? null : t("nav.sessions"),
           icon: <SparkUserGroupLine size={16} />,
@@ -334,12 +326,11 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
           label: collapsed ? null : t("nav.mcp"),
           icon: <SparkMcpMcpLine size={16} />,
         },
-        // ACP hidden for LTCLAW-GY.X local deployment
-        // {
-        //   key: "acp",
-        //   label: collapsed ? null : t("nav.acp"),
-        //   icon: <SparkScanLine size={16} />,
-        // },
+        {
+          key: "acp",
+          label: collapsed ? null : t("nav.acp"),
+          icon: <SparkScanLine size={16} />,
+        },
         {
           key: "agent-config",
           label: collapsed ? null : t("nav.agentConfig"),

@@ -10,7 +10,6 @@ import {
   type Session,
 } from "./components";
 import { useSessions } from "./useSessions";
-import api from "../../../api";
 import { PageHeader } from "@/components/PageHeader";
 import styles from "./index.module.less";
 
@@ -31,27 +30,10 @@ function SessionsPage() {
   const [form] = Form.useForm<Session>();
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
-  // Filter states
   const [filterUserId, setFilterUserId] = useState<string>("");
-  const [filterChannel, setFilterChannel] = useState<string>("");
-  const [availableChannels, setAvailableChannels] = useState<string[]>([]);
 
   const { message } = useAppMessage();
 
-  useEffect(() => {
-    const fetchChannelTypes = async () => {
-      try {
-        const types = await api.listChannelTypes();
-        setAvailableChannels(types);
-      } catch (error) {
-        console.error("❌ Failed to load channel types:", error);
-      }
-    };
-    fetchChannelTypes();
-  }, []);
-
-  // Filter effect
   useEffect(() => {
     let filtered: Session[] = sessions;
 
@@ -62,14 +44,8 @@ function SessionsPage() {
       );
     }
 
-    if (filterChannel) {
-      filtered = filtered.filter(
-        (session: Session) => session.channel === filterChannel,
-      );
-    }
-
     setFilteredSessions(filtered);
-  }, [sessions, filterUserId, filterChannel]);
+  }, [sessions, filterUserId]);
 
   const handleEdit = (session: Session) => {
     setEditingSession(session);
@@ -163,10 +139,7 @@ function SessionsPage() {
           <div className={styles.headerRight}>
             <FilterBar
               filterUserId={filterUserId}
-              filterChannel={filterChannel}
-              uniqueChannels={availableChannels}
               onUserIdChange={setFilterUserId}
-              onChannelChange={setFilterChannel}
             />
             {selectedRowKeys.length > 0 && (
               <Button type="primary" danger onClick={handleBatchDelete}>

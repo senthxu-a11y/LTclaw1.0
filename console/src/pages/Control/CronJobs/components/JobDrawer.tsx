@@ -351,15 +351,8 @@ export function JobDrawer({
           <Input disabled value="channel" />
         </Form.Item>
 
-        <Form.Item
-          name={["dispatch", "channel"]}
-          label={t("cronJobs.dispatchChannel")}
-          rules={[
-            { required: true, message: t("cronJobs.pleaseInputChannel") },
-          ]}
-          tooltip={t("cronJobs.dispatchChannelTooltip")}
-        >
-          <Input placeholder="console" />
+        <Form.Item name={["dispatch", "channel"]} hidden>
+          <Input />
         </Form.Item>
 
         <Form.Item

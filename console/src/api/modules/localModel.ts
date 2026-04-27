@@ -55,7 +55,10 @@ export const localModelApi = {
     ),
 
   startLocalServer: (body: StartLocalServerRequest) =>
-    request<{ port: number; model_name: string }>("/local-models/server", {
+    request<{
+      port: number;
+      model_info: { id: string; name: string };
+    }>("/local-models/server", {
       method: "POST",
       body: JSON.stringify(body),
     }),

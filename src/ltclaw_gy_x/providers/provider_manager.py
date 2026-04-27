@@ -580,8 +580,8 @@ PROVIDER_ZHIPU_INTL_CODINGPLAN = OpenAIProvider(
 )
 
 PROVIDER_LTC_LOCAL = OpenAIProvider(
-    id="ltclaw-local",
-    name="LTCLocal",
+    id="ltclaw_gy_x-local",
+    name="llama.cpp Local",
     is_local=True,
     require_api_key=False,
 )
@@ -772,7 +772,7 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
                 pass
 
     def _init_builtins(self):
-        self._add_builtin(PROVIDER_QWENPAW)
+        self._add_builtin(PROVIDER_LTC_LOCAL)
         self._add_builtin(PROVIDER_OLLAMA)
         self._add_builtin(PROVIDER_LMSTUDIO)
         self._add_builtin(PROVIDER_OPENROUTER)
@@ -828,9 +828,9 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
     def _normalize_provider_id(provider_id: str) -> str:
         """Normalize provider ID for backward compatibility.
 
-        Maps legacy 'ltclaw_gy_x-local' to 'ltclaw_gy_x-local'.
+        Maps older aliases to the canonical local provider id.
         """
-        if provider_id == "ltclaw_gy_x-local":
+        if provider_id == "ltclaw-local":
             return "ltclaw_gy_x-local"
         return provider_id
 
@@ -1402,27 +1402,27 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
             return None
 
     def _migrate_ltclaw_gy_x_config(self) -> None:
-        """Migrate ltclaw_gy_x-local provider config to ltclaw_gy_x-local."""
+        """Migrate legacy local-provider ids/configs to the canonical id."""
         # 1. Migrate active model configuration (only provider_id)
         if (
             self.active_model
-            and self.active_model.provider_id == "ltclaw_gy_x-local"
+            and self.active_model.provider_id == "ltclaw-local"
         ):
             self.active_model.provider_id = "ltclaw_gy_x-local"
             self.save_active_model(self.active_model)
             logger.info(
                 "Migrated active model provider from "
-                "'ltclaw_gy_x-local' to 'ltclaw_gy_x-local'",
+                "'ltclaw-local' to 'ltclaw_gy_x-local'",
             )
 
         # 2. Migrate stored provider config file
-        ltclaw_gy_x_config_path = self.builtin_path / "ltclaw_gy_x-local.json"
-        if not ltclaw_gy_x_config_path.exists():
+        legacy_config_path = self.builtin_path / "ltclaw-local.json"
+        if not legacy_config_path.exists():
             return
 
         try:
             # Load old config and apply to new provider instance
-            with open(ltclaw_gy_x_config_path, "r", encoding="utf-8") as f:
+            with open(legacy_config_path, "r", encoding="utf-8") as f:
                 old_config = json.load(f)
 
             # Get the new built-in provider instance
@@ -1445,13 +1445,13 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
             self._save_provider(provider, is_builtin=True)
 
             # Remove old config file
-            ltclaw_gy_x_config_path.unlink()
+            legacy_config_path.unlink()
             logger.info(
                 "Migrated provider config from "
-                "'ltclaw_gy_x-local.json' to 'ltclaw_gy_x-local.json'",
+                "'ltclaw-local.json' to 'ltclaw_gy_x-local.json'",
             )
         except Exception as exc:
-            logger.warning("Failed to migrate ltclaw_gy_x-local config: %s", exc)
+            logger.warning("Failed to migrate ltclaw-local config: %s", exc)
 
     # pylint: disable=too-many-branches
     def _migrate_legacy_providers(self):
@@ -1505,7 +1505,7 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
             if active_model:
                 try:
                     # Convert legacy ltclaw_gy_x-local provider_id
-                    if active_model.get("provider_id") == "ltclaw_gy_x-local":
+                    if active_model.get("provider_id") == "ltclaw-local":
                         active_model["provider_id"] = "ltclaw_gy_x-local"
                     self.active_model = ModelSlotConfig.model_validate(
                         active_model,
@@ -1570,7 +1570,7 @@ class ProviderManager:  # pylint: disable=too-many-public-methods
         if active_model:
             self.active_model = active_model
 
-        # Migrate ltclaw_gy_x-local to ltclaw_gy_x-local for backwards compatibility
+        # Migrate legacy local provider id/config for backwards compatibility.
         self._migrate_ltclaw_gy_x_config()
 
     def _apply_default_annotations(self):

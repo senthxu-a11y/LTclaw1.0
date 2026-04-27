@@ -117,6 +117,18 @@
   letter-spacing: 0.02em;
 }
 
+.localProviderHeader {
+  margin-bottom: 12px;
+}
+
+.localProviderDescription {
+  margin: -4px 0 14px;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 640px;
+}
+
 /* ---- Provider Cards ---- */
 
 .providerCards {
@@ -175,7 +187,7 @@
   }
 
   &.partial {
-    color: #faad14;
+    color: #6b7280;
   }
 
   &.disabled {
@@ -233,9 +245,9 @@
   border-radius: 4px;
   font-size: 11px;
   font-weight: 500;
-  background-color: rgba(255, 247, 230, 0.8);
-  color: #ff7f16;
-  border: 1px solid rgba(255, 127, 22, 0.2);
+  background-color: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
 .localTag {
@@ -245,8 +257,8 @@
   border-radius: 4px;
   font-size: 11px;
   font-weight: 500;
-  background-color: rgba(29, 212, 215, 0.15);
-  color: rgba(29, 212, 215, 1);
+  background-color: rgba(107, 114, 128, 0.12);
+  color: #4b5563;
 }
 
 .statusContainer {
@@ -263,7 +275,7 @@
     }
 
     &.partial {
-      color: #faad14;
+      color: #6b7280;
     }
 
     &.disabled {
@@ -417,8 +429,8 @@
     box-shadow 0.2s ease;
 
   &:focus-within {
-    border-color: #ff7f16;
-    box-shadow: 0 0 0 2px rgba(97, 92, 237, 0.12);
+    border-color: #9ca3af;
+    box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.18);
   }
 }
 
@@ -962,9 +974,9 @@
 }
 
 .localStatusBadgeDead {
-  color: #faad14;
-  background: #fff7ed;
-  border: 1px solid #faad14;
+  color: #6b7280;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
 }
 
 .localStatusBadgeProgress {
@@ -1027,8 +1039,8 @@
   flex-direction: column;
   align-items: stretch;
   gap: 10px;
-  background: linear-gradient(180deg, #fffaf3 0%, #fffdf8 100%);
-  border-left: 3px solid rgba(255, 127, 22, 0.35);
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  border-left: 3px solid rgba(107, 114, 128, 0.28);
 }
 
 .customModelHeader {
@@ -1200,7 +1212,7 @@
   }
 
   :global(.ant-progress-inner) {
-    background: rgba(255, 127, 22, 0.14);
+    background: rgba(156, 163, 175, 0.2);
     border-radius: 999px;
   }
 
@@ -1290,6 +1302,10 @@
     color: rgba(255, 255, 255, 0.4);
   }
 
+  .localProviderDescription {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
   .localModalTitle,
   .localSectionTitle,
   .localSummaryValue,
@@ -1363,7 +1379,7 @@
 
   .localRuntimeProgress {
     :global(.ant-progress-inner) {
-      background: rgba(255, 127, 22, 0.18);
+      background: rgba(107, 114, 128, 0.28);
     }
   }
 
@@ -1394,14 +1410,14 @@
   }
 
   .customTag {
-    background-color: rgba(255, 127, 22, 0.15);
-    color: #ff9d4d;
-    border-color: rgba(255, 127, 22, 0.25);
+    background-color: rgba(107, 114, 128, 0.18);
+    color: #d1d5db;
+    border-color: rgba(156, 163, 175, 0.28);
   }
 
   .localTag {
-    background-color: rgba(29, 212, 215, 0.15);
-    color: rgba(29, 212, 215, 1);
+    background-color: rgba(107, 114, 128, 0.18);
+    color: #d1d5db;
   }
 
   .infoRow {
@@ -1429,7 +1445,7 @@
     color: rgba(255, 255, 255, 0.65) !important;
 
     &:hover {
-      color: #ff7f16 !important;
+      color: #d1d5db !important;
     }
   }
 
@@ -1494,7 +1510,7 @@
     background: #1a1a1a;
 
     &:focus-within {
-      border-color: #ff7f16;
+      border-color: #9ca3af;
     }
   }
 
@@ -1526,16 +1542,16 @@
   .customModelListItem {
     background: linear-gradient(
       180deg,
-      rgba(255, 127, 22, 0.1) 0%,
-      rgba(255, 127, 22, 0.04) 100%
+      rgba(107, 114, 128, 0.14) 0%,
+      rgba(107, 114, 128, 0.06) 100%
     );
-    border-left-color: rgba(255, 127, 22, 0.55);
+    border-left-color: rgba(156, 163, 175, 0.5);
 
     &:hover {
       background: linear-gradient(
         180deg,
-        rgba(255, 127, 22, 0.14) 0%,
-        rgba(255, 127, 22, 0.06) 100%
+        rgba(107, 114, 128, 0.18) 0%,
+        rgba(107, 114, 128, 0.08) 100%
       );
     }
   }

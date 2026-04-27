@@ -9,6 +9,12 @@ import {
 const DEFAULT_FALLBACK_URL =
   "https://gw.alicdn.com/imgextra/i4/O1CN01IWnlOw1lebfpiFrIL_!!6000000004844-0-tps-100-100.jpg";
 
+const GRAYSCALE_PROVIDER_IDS = new Set([
+  "aliyun-codingplan",
+  "aliyun-codingplan-intl",
+  "ltclaw_gy_x-local",
+]);
+
 interface ProviderIconProps {
   providerId: string;
   size?: number;
@@ -35,7 +41,14 @@ export const ProviderIcon: React.FC<ProviderIconProps> = ({
         alt={providerId}
         width={size}
         height={size}
-        style={{ borderRadius, objectFit: "cover", flexShrink: 0 }}
+        style={{
+          borderRadius,
+          objectFit: "cover",
+          flexShrink: 0,
+          filter: GRAYSCALE_PROVIDER_IDS.has(providerId)
+            ? "grayscale(1)"
+            : undefined,
+        }}
         onError={() => setImageFailed(true)}
       />
     );

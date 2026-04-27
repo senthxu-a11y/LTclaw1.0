@@ -1220,7 +1220,7 @@ export default function ChatPage() {
         }}
       >
         <Result
-          icon={<ExclamationCircleOutlined style={{ color: "#faad14" }} />}
+          icon={<ExclamationCircleOutlined style={{ color: "#6b7280" }} />}
           title={
             <span
               style={{ color: isDark ? "rgba(255,255,255,0.88)" : undefined }}
