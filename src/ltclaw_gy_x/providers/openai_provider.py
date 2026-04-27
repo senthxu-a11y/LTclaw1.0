@@ -23,6 +23,21 @@ logger = logging.getLogger(__name__)
 DASHSCOPE_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 CODING_DASHSCOPE_BASE_URL = "https://coding.dashscope.aliyuncs.com/v1"
 
+
+def _extract_openai_error_message(exc: Exception) -> str:
+    """Return the most specific OpenAI-compatible error message available."""
+    body = getattr(exc, "body", None)
+    if isinstance(body, dict):
+        error = body.get("error")
+        if isinstance(error, dict):
+            message = error.get("message")
+            if message:
+                return str(message)
+        message = body.get("message")
+        if message:
+            return str(message)
+    return str(exc)
+
 if os.environ.get("LANGFUSE_SECRET_KEY") and importlib.util.find_spec(
     "langfuse",
 ):
@@ -127,8 +142,8 @@ class OpenAIProvider(Provider):
             async for _ in res:
                 break
             return True, ""
-        except APIError:
-            return False, f"API error when connecting to model '{model_id}'"
+        except APIError as e:
+            return False, _extract_openai_error_message(e)
         except Exception:
             return (
                 False,

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Button, Card, Input, Switch } from "@agentscope-ai/design";
 import { CopyOutlined, UndoOutlined, SaveOutlined } from "@ant-design/icons";
 import type { MarkdownFile } from "../../../../api/types";
@@ -29,13 +29,17 @@ export const FileEditor: React.FC<FileEditorProps> = ({
 }) => {
   const { t } = useTranslation();
   const { message } = useAppMessage();
-  const [showMarkdown, setShowMarkdown] = useState(true);
+  const [showMarkdown, setShowMarkdown] = useState(false);
 
   const isMarkdownFile = selectedFile?.filename.endsWith(".md") || false;
   const markdownContent = useMemo(
     () => stripFrontmatter(fileContent || ""),
     [fileContent],
   );
+
+  useEffect(() => {
+    setShowMarkdown(false);
+  }, [selectedFile?.filename]);
 
   const copyToClipboard = async () => {
     try {

@@ -26,6 +26,21 @@ DASHSCOPE_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 CODING_DASHSCOPE_BASE_URL = "https://coding.dashscope.aliyuncs.com/v1"
 
 
+def _extract_anthropic_error_message(exc: Exception) -> str:
+    """Return the most specific Anthropic-side error message available."""
+    body = getattr(exc, "body", None)
+    if isinstance(body, dict):
+        error = body.get("error")
+        if isinstance(error, dict):
+            message = error.get("message")
+            if message:
+                return str(message)
+        message = body.get("message")
+        if message:
+            return str(message)
+    return str(exc)
+
+
 class AnthropicProvider(Provider):
     """Provider implementation for Anthropic API."""
 
@@ -119,8 +134,8 @@ class AnthropicProvider(Provider):
             async for _ in resp:
                 break
             return True, ""
-        except anthropic.APIError:
-            return False, f"Model '{model_id}' is not reachable or usable"
+        except anthropic.APIError as e:
+            return False, _extract_anthropic_error_message(e)
         except Exception:
             return (
                 False,

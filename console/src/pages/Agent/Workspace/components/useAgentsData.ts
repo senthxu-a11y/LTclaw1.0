@@ -63,6 +63,8 @@ export const useAgentsData = () => {
           // File doesn't exist in new workspace, clear selection
           setSelectedFile(null);
         }
+      } else if (sortedFiles.length > 0) {
+        await handleFileClick(sortedFiles[0]);
       } else {
         setSelectedFile(null);
       }

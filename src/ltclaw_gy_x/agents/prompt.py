@@ -33,7 +33,7 @@ class PromptConfig:
     # Default files to load when no config is provided
     # All files are optional - if they don't exist, they'll be skipped
     DEFAULT_FILES = [
-        "AGENTS.md",
+        "BOOTSTRAP.md",
         "SOUL.md",
         "PROFILE.md",
     ]
@@ -247,7 +247,7 @@ def build_system_prompt_from_working_dir(
     The files to load are determined by the enabled_files parameter or
     agents.system_prompt_files configuration. If not configured, falls back to
     default files:
-    - AGENTS.md - Detailed workflows, rules, and guidelines
+    - BOOTSTRAP.md - Initial setup guidance and bootstrap instructions
     - SOUL.md - Core identity and behavioral principles
     - PROFILE.md - Agent identity and user profile
 
@@ -271,8 +271,8 @@ def build_system_prompt_from_working_dir(
              If no files exist, returns the default prompt.
 
     Example:
-        If working_dir contains AGENTS.md, SOUL.md and PROFILE.md, they will be combined:
-        "# AGENTS.md\\n\\n...\\n\\n# SOUL.md\\n\\n...\\n\\n# PROFILE.md\\n\\n..."
+        If working_dir contains BOOTSTRAP.md, SOUL.md and PROFILE.md, they will be combined:
+        "# BOOTSTRAP.md\\n\\n...\\n\\n# SOUL.md\\n\\n...\\n\\n# PROFILE.md\\n\\n..."
     """
     from ..constant import WORKING_DIR
     from ..config import load_config

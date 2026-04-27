@@ -26,6 +26,14 @@ from ltclaw_gy_x.providers.provider import ModelInfo, Provider
 logger = logging.getLogger(__name__)
 
 
+def _extract_gemini_error_message(exc: Exception) -> str:
+    """Return the most specific Gemini-side error message available."""
+    message = getattr(exc, "message", None)
+    if message:
+        return str(message)
+    return str(exc)
+
+
 class GeminiProvider(Provider):
     """Provider implementation for Google Gemini API."""
 
@@ -120,10 +128,10 @@ class GeminiProvider(Provider):
             async for _ in response:
                 break
             return True, ""
-        except genai_errors.APIError:
+        except genai_errors.APIError as e:
             return (
                 False,
-                f"Model '{model_id}' is not reachable or usable",
+                _extract_gemini_error_message(e),
             )
         except Exception:
             return (

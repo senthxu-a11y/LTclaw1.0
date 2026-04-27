@@ -1,6 +1,7 @@
-# LTclaw1.0 Local Modification Log
+# LTclaw1.0 Modification Log
 
 Date: 2026-04-27
+Version: v1.0.0
 
 This file summarizes the local source changes completed for the customized
 `LTclaw1.0` desktop/client build.
@@ -9,72 +10,85 @@ This file summarizes the local source changes completed for the customized
 
 ### 1. Desktop startup and WebView stability
 
-- Fixed the desktop startup path so the desktop client can actually open a
-  native window instead of only starting the backend.
-- Forced Windows desktop startup to use the `edgechromium` backend in
-  `pywebview`.
-- Added desktop wrapper logging to:
+- Fixed the Windows desktop startup path so the desktop client can actually
+  open a native WebView window instead of only starting the backend.
+- Forced desktop startup to use the `edgechromium` backend in `pywebview`.
+- Added desktop wrapper logging at:
   `C:\Users\xuguangyao\.ltclaw_gy_x\desktop_logs\desktop.wrapper.log`
 - Changed the validated Windows launch path to use `pythonw.exe` for
-  no-console startup while preserving the desktop window.
-- Restored the desktop window to normal windowed mode instead of default
-  maximized/fullscreen startup.
+  hidden-console startup while still bringing up the desktop window.
+- Added best-effort window focus/restore logic after startup.
+- Restored normal windowed startup instead of default fullscreen/maximized
+  behavior.
 
-### 2. Branding cleanup
+### 2. Branding and visible product naming cleanup
 
-- Replaced visible `QwenPaw` branding in the customized runtime path with
-  `LTCLAW-GY.X` in the console title/header and Windows packaging metadata.
-- Updated the header version display to use the project/backend version.
-- Cleaned multiple Windows packaging remnants that still referenced the old
-  product naming.
+- Updated visible product version display to custom `v1.0.0`.
+- Replaced user-visible `QwenPaw Console`, `QwenPaw Desktop`,
+  `qwenpawBack.png` and related branding remnants in the customized UI path.
+- Unified default visible agent naming:
+  - default agent: `LTClaw`
+  - builtin QA agent: `LTClaw QA`
+- Replaced user-facing `LTCLAW-GY.X` branding in default QA persona/templates
+  with `LTClaw`, while preserving stable internal QA agent IDs for
+  compatibility.
 
-### 3. Telemetry and init cleanup
+### 3. Workspace and core file fixes
 
-- Removed telemetry-related code paths and prompt/marker logic from init and
-  related runtime code.
-- Simplified startup behavior so customized builds do not show the old
-  telemetry/init guidance path.
+- Fixed workspace core file editing so the right-side editor opens directly and
+  defaults to editable text mode.
+- Auto-selects the first core file when entering the workspace page.
+- Adjusted the core file editor layout to fit the available panel area by
+  default.
+- Normalized system prompt defaults from legacy `AGENTS.md` usage to the
+  actual shipped file set:
+  `BOOTSTRAP.md`, `SOUL.md`, `PROFILE.md`.
+- Ensured default agent and existing agents both backfill missing core files on
+  startup.
+- Ensured newly created agents always get editable baseline files:
+  `BOOTSTRAP.md`, `HEARTBEAT.md`, `MEMORY.md`, `PROFILE.md`, `SOUL.md`,
+  plus base workspace JSON files.
 
-### 4. Console/UI runtime fixes
+### 4. QA/default agent behavior cleanup
 
-- Fixed runtime CSS selector coverage for the actual prefixed class names used
-  by the app so the sidebar and related layout styles apply correctly.
-- Reduced frontend dynamic import warnings by narrowing page module discovery
-  to actual route/page entry modules instead of broad page internals.
-- Cleaned the TypeScript app config by removing deprecated `baseUrl` usage and
-  preserving the `@/*` alias via `./src/*`.
+- Ensured the default agent is initialized with the same editable core file
+  baseline as other agents.
+- Preserved deletion protection only for `default`; non-default agents remain
+  user-deletable from the UI.
+- Hid the skill trial channel entry in create-skill flow as requested.
 
-### 5. Windows packaging chain cleanup
+### 5. Provider error reporting improvements
 
-- Fixed Windows build scripts that still referenced non-existent
-  `src/qwenpaw/...` paths.
-- Updated wheel/packaging scripts to use the real `ltclaw_gy_x` package name.
-- Updated the packaged Windows launcher scripts to call `ltclaw_gy_x` instead
-  of old `qwenpaw` entry points.
-- Fixed the NSIS installer registry path to use `LTCLAW-GY.X`.
+- Improved provider connection-test failures to surface server-side raw error
+  messages instead of generic `not reachable or usable` wording.
+- Applied this behavior to the touched provider adapters:
+  `openai`, `anthropic`, `gemini`.
 
-### 6. Runtime/process cleanup
+### 6. Console/UI cleanup
 
-- Confirmed runtime data directories are under the user profile:
+- Updated workspace language-switch copy to reference `BOOTSTRAP.md` instead
+  of stale `AGENTS.md`.
+- Continued cleanup of sidebar/header visible branding and UI consistency.
+- Kept the grey unified visual baseline while preserving readability in the
+  workspace editor.
+
+## Runtime data and directory notes
+
+- Confirmed runtime data directories under the user profile:
   - `C:\Users\xuguangyao\.ltclaw_gy_x`
   - `C:\Users\xuguangyao\.ltclaw_gy_x.secret`
-- Removed stray root-level workdir copies and an unused `fix_classnames.py`.
-- Fixed Windows shutdown/process enumeration text decoding so shutdown no
-  longer emits GBK decode exceptions during process scanning.
+- Source tree remains under:
+  - `E:\LTClaw\LTclaw1.0`
 
 ## Verification completed
 
-- Desktop window successfully launched and showed the title
-  `LTCLAW-GY.X Desktop`.
-- Python compile checks passed for the touched backend/CLI files.
-- Frontend TypeScript config validation passed.
-- `npm run build` passed.
-- Git worktree was cleaned and committed after the changes.
+- Desktop window successfully relaunched on Windows with WebView2 and focused
+  correctly.
+- Existing default and QA workspaces were backfilled with expected core files.
+- Python syntax checks passed for touched backend files.
+- `npm run build` passed for `console`.
 
-## Key commits from this customization round
+## Known non-blocking items
 
-- `27f2614` Clean desktop runtime and LTCLAW-GY.X branding
-- `1386463` Reduce frontend dynamic import warnings
-- `4d4be78` Stabilize Windows desktop startup
-- `86a8257` Finalize desktop window sizing and tsconfig cleanup
-
+- Vite still reports chunk-size and mixed dynamic/static import warnings during
+  build; these do not block desktop/runtime startup.

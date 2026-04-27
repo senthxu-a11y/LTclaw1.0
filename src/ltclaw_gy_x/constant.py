@@ -110,7 +110,7 @@ SECRET_DIR = (
     .resolve()
 )
 
-PROJECT_NAME = "LTCLAW-GY.X"
+PROJECT_NAME = "LTClaw"
 
 # Default media directory for channels (cross-platform)
 DEFAULT_MEDIA_DIR = WORKING_DIR / "media"
@@ -143,7 +143,7 @@ def _discover_agent_languages() -> frozenset[str]:
 SUPPORTED_AGENT_LANGUAGES: frozenset[str] = _discover_agent_languages()
 
 BUILTIN_QA_AGENT_ID = "LTCLAW-GY.X_QA_Agent_0.2"
-BUILTIN_QA_AGENT_NAME = "QA Agent"
+BUILTIN_QA_AGENT_NAME = "LTClaw QA"
 # Default skills when the builtin QA workspace is first created only.
 BUILTIN_QA_AGENT_SKILL_NAMES: tuple[str, ...] = (
     "guidance",

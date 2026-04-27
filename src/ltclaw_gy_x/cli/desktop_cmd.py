@@ -8,6 +8,7 @@ import os
 import socket
 import subprocess
 import sys
+import threading
 import time
 import traceback
 import webbrowser
@@ -23,6 +24,8 @@ except ImportError:
     webview = None  # type: ignore[assignment]
 
 logger = logging.getLogger(__name__)
+WINDOW_TITLE = "LTCLAW-GY.X Desktop"
+GUI_RELAUNCH_ENV = "LTCLAW_GY_X_DESKTOP_GUI_RELAUNCHED"
 
 
 def _ensure_wrapper_file_logger() -> None:
@@ -127,6 +130,103 @@ def _wait_for_http(host: str, port: int, timeout_sec: float = 300.0) -> bool:
         except (OSError, socket.error):
             time.sleep(1)
     return False
+
+
+def _get_windows_gui_python() -> str | None:
+    """Return sibling pythonw.exe when available."""
+    if not sys.platform.startswith("win"):
+        return None
+
+    exe_path = os.path.abspath(sys.executable)
+    exe_dir = os.path.dirname(exe_path)
+    gui_python = os.path.join(exe_dir, "pythonw.exe")
+    if os.path.exists(gui_python):
+        return gui_python
+    return None
+
+
+def _relaunch_with_pythonw_if_needed(host: str, log_level: str) -> bool:
+    """Re-launch under pythonw on Windows so desktop mode is truly GUI-first."""
+    if not sys.platform.startswith("win"):
+        return False
+    if os.environ.get(GUI_RELAUNCH_ENV) == "1":
+        return False
+
+    exe_name = os.path.basename(sys.executable).lower()
+    if exe_name == "pythonw.exe":
+        return False
+
+    gui_python = _get_windows_gui_python()
+    if not gui_python:
+        logger.warning("pythonw.exe not found next to %s", sys.executable)
+        return False
+
+    env = os.environ.copy()
+    env[GUI_RELAUNCH_ENV] = "1"
+    creationflags = 0
+    detached_process = getattr(subprocess, "DETACHED_PROCESS", 0)
+    create_new_process_group = getattr(
+        subprocess,
+        "CREATE_NEW_PROCESS_GROUP",
+        0,
+    )
+    creationflags |= detached_process | create_new_process_group
+    subprocess.Popen(
+        [
+            gui_python,
+            "-m",
+            "ltclaw_gy_x",
+            "desktop",
+            "--host",
+            host,
+            "--log-level",
+            log_level,
+        ],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        env=env,
+        cwd=os.getcwd(),
+        creationflags=creationflags,
+        close_fds=True,
+    )
+    logger.info("Desktop re-launched via pythonw.exe")
+    click.echo("Desktop launcher detached to pythonw.exe")
+    return True
+
+
+def _focus_window_on_windows(window_title: str) -> None:
+    """Best-effort foreground restore for the desktop window."""
+    if not sys.platform.startswith("win"):
+        return
+
+    def _worker() -> None:
+        user32 = getattr(getattr(__import__("ctypes"), "windll", None), "user32", None)
+        if user32 is None:
+            return
+
+        sw_restore = 9
+        sw_show = 5
+        for _ in range(20):
+            hwnd = user32.FindWindowW(None, window_title)
+            if hwnd:
+                user32.ShowWindow(hwnd, sw_restore)
+                user32.ShowWindow(hwnd, sw_show)
+                user32.SetForegroundWindow(hwnd)
+                user32.BringWindowToTop(hwnd)
+                user32.SetActiveWindow(hwnd)
+                logger.info("Desktop window focused, hwnd=%s", hwnd)
+                return
+            time.sleep(0.5)
+        logger.warning("Unable to locate desktop window for foreground restore")
+
+    threading.Thread(
+        target=_worker,
+        name="desktop-window-focus",
+        daemon=True,
+    ).start()
+
+
 @click.command("desktop")
 @click.option(
     "--host",
@@ -157,6 +257,8 @@ def desktop_cmd(
     # Setup logger for desktop command (separate from backend subprocess)
     setup_logger(log_level)
     _ensure_wrapper_file_logger()
+    if _relaunch_with_pythonw_if_needed(host, log_level):
+        return
 
     port = _find_free_port(host)
     url = f"http://{host}:{port}"
@@ -222,7 +324,7 @@ def desktop_cmd(
                 logger.info("HTTP ready, creating webview window...")
                 api = WebViewAPI()
                 window = webview.create_window(
-                    "LTCLAW-GY.X Desktop",
+                    WINDOW_TITLE,
                     url,
                     width=1280,
                     height=800,
@@ -242,7 +344,10 @@ def desktop_cmd(
                 if sys.platform.startswith("win"):
                     start_kwargs["gui"] = "edgechromium"
                 logger.info("webview.start kwargs: %s", start_kwargs)
-                webview.start(**start_kwargs)  # blocks until user closes the window
+                webview.start(
+                    lambda: _focus_window_on_windows(WINDOW_TITLE),
+                    **start_kwargs,
+                )  # blocks until user closes the window
                 logger.info("webview.start() returned (window closed).")
             else:
                 logger.error("Server did not become ready in time.")

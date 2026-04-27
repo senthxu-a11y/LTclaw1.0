@@ -322,9 +322,11 @@ export function SkillDrawer({
           />
         </Form.Item>
 
-        <Form.Item name="channels" label={t("skills.channels")}>
-          <Select mode="multiple" options={CHANNEL_OPTIONS} />
-        </Form.Item>
+        {editingSkill && (
+          <Form.Item name="channels" label={t("skills.channels")}>
+            <Select mode="multiple" options={CHANNEL_OPTIONS} />
+          </Form.Item>
+        )}
 
         <Form.Item
           name="tags"

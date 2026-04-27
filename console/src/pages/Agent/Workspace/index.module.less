@@ -157,29 +157,43 @@
   :global {
     .qwenpaw-card-body {
       height: 100%;
+      display: flex;
+      flex-direction: column;
 
       .qwenpaw-spark-card-wrapper {
         height: 100%;
+        display: flex;
+        flex-direction: column;
       }
 
       .qwenpaw-spark-content {
         height: 100%;
+        display: flex;
+        flex-direction: column;
       }
 
       .agentscope-runtime-webui-spark-card-wrapper {
         height: 100%;
+        display: flex;
+        flex-direction: column;
 
         .agentscope-runtime-webui-spark-content {
           height: 100%;
+          display: flex;
+          flex-direction: column;
         }
       }
 
       .spark-card-wrapper {
         height: 100%;
+        display: flex;
+        flex-direction: column;
 
         .spark-content {
           height: 100%;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
         }
       }
     }
@@ -215,15 +229,11 @@
 
 .editorContent {
   padding: 16px;
-  height: calc(100% - 96px);
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
-
-  textarea {
-    font-family: monospace;
-    font-size: 13px;
-    resize: vertical;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
 }
 
 .contentLabel {
@@ -239,10 +249,10 @@
 
 .markdownViewer {
   flex: 1;
-  height: calc(100% - 20px);
+  min-height: 0;
   overflow: auto;
   border: 1px solid #e8e8e8;
-  padding: 16px;
+  padding: 12px 14px;
   border-radius: 8px;
   max-width: 100%;
 
@@ -318,10 +328,29 @@
 .textarea {
   font-family: monospace;
   font-size: 13px;
-  resize: vertical;
-  height: min(100%, clamp(280px, 50vh, 640px));
-  min-height: min(240px, 100%);
-  max-height: 100%;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+
+  :global {
+    .qwenpaw-input-textarea,
+    .ant-input-textarea {
+      height: 100%;
+      display: block;
+    }
+
+    textarea {
+      height: 100% !important;
+      min-height: 100% !important;
+      max-height: none !important;
+      resize: none;
+      line-height: 1.6;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+  }
 }
 
 .markdownToggle {
@@ -488,7 +517,9 @@
 }
 
 .attribution {
-  height: 20px;
+  margin: 0;
+  padding: 0 16px 12px;
+  min-height: 20px;
   font-size: 11px;
   color: #bbb;
   text-align: center;

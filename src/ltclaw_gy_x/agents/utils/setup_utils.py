@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 
 _TEMPLATE_OVERRIDE_FILENAMES = {
     "AGENTS.md",
-    "BOOTSTRAP.md",
     "PROFILE.md",
     "SOUL.md",
 }
@@ -166,20 +165,6 @@ def _copy_template_md_files(
     return copied
 
 
-def _remove_bootstrap_from_workspace(workspace_dir: Path) -> None:
-    bootstrap = workspace_dir / "BOOTSTRAP.md"
-    if not bootstrap.exists():
-        return
-    try:
-        bootstrap.unlink()
-        logger.info(
-            "Removed BOOTSTRAP.md from builtin QA workspace %s",
-            workspace_dir,
-        )
-    except OSError as e:
-        logger.warning("Could not remove BOOTSTRAP.md: %s", e)
-
-
 def copy_template_md_files(
     template_id: str,
     language: str,
@@ -219,7 +204,6 @@ def copy_template_md_files(
         workspace_dir,
         only_if_missing,
     )
-    _remove_bootstrap_from_workspace(workspace_dir)
     return copied_files
 
 

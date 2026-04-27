@@ -30,8 +30,9 @@ from ..config.utils import load_config, save_config
 
 logger = logging.getLogger(__name__)
 
-_DEFAULT_AGENT_NAME = "Default Agent"
-_DEFAULT_AGENT_DESCRIPTION = "Default LTCLAW-GY.X agent"
+_DEFAULT_AGENT_NAME = "LTClaw"
+_DEFAULT_AGENT_DESCRIPTION = "Default LTClaw agent"
+_DEFAULT_SYSTEM_PROMPT_FILES = ["BOOTSTRAP.md", "SOUL.md", "PROFILE.md"]
 
 # Workspace items to migrate: (name, is_directory)
 _WORKSPACE_ITEMS_TO_MIGRATE = [
@@ -124,8 +125,8 @@ def _do_migrate_legacy_workspace() -> bool:
     # Build default agent configuration from legacy settings
     default_agent_config = AgentProfileConfig(
         id="default",
-        name="Default Agent",
-        description="Default LTCLAW-GY.X agent (migrated from legacy config)",
+        name="LTClaw",
+        description="Default LTClaw agent (migrated from legacy config)",
         workspace_dir=str(default_workspace),
         channels=config.channels if hasattr(config, "channels") else None,
         mcp=config.mcp if hasattr(config, "mcp") else None,
@@ -149,7 +150,7 @@ def _do_migrate_legacy_workspace() -> bool:
             legacy_agents.system_prompt_files
             if hasattr(legacy_agents, "system_prompt_files")
             and legacy_agents.system_prompt_files
-            else ["AGENTS.md", "SOUL.md", "PROFILE.md"]
+            else _DEFAULT_SYSTEM_PROMPT_FILES
         ),
         tools=config.tools if hasattr(config, "tools") else None,
         security=config.security if hasattr(config, "security") else None,
@@ -641,6 +642,52 @@ def _ensure_workspace_json_files(
                 logger.debug("Created %s for %s", filename, label)
 
 
+def _normalize_system_prompt_files(
+    agent_id: str,
+    workspace_dir: Path,
+    agent_config,
+) -> None:
+    """Normalize legacy prompt file references to files that exist on disk."""
+    system_prompt_files = list(agent_config.system_prompt_files or [])
+    if not system_prompt_files:
+        return
+
+    normalized_files: list[str] = []
+    for name in system_prompt_files:
+        if (
+            name == "AGENTS.md"
+            and not (workspace_dir / "AGENTS.md").exists()
+            and (workspace_dir / "BOOTSTRAP.md").exists()
+        ):
+            normalized_files.append("BOOTSTRAP.md")
+            continue
+        normalized_files.append(name)
+
+    if normalized_files != system_prompt_files:
+        agent_config.system_prompt_files = normalized_files
+        save_agent_config(agent_id, agent_config)
+
+
+def _ensure_agent_workspace_files(
+    agent_id: str,
+    workspace_dir: Path,
+    *,
+    template_id: str | None,
+    language: str,
+) -> None:
+    """Backfill missing workspace files for an existing agent."""
+    from .routers.agents import _initialize_agent_workspace
+    from ..agents.templates import get_workspace_md_template_id
+
+    _ensure_workspace_json_files(workspace_dir, f"{agent_id} agent")
+    _initialize_agent_workspace(
+        workspace_dir,
+        skill_names=[],
+        md_template_id=get_workspace_md_template_id(template_id),
+        language=language,
+    )
+
+
 def ensure_default_agent_exists() -> None:
     """Ensure that the default agent exists in config.
 
@@ -660,6 +707,8 @@ def ensure_default_agent_exists() -> None:
 
 def _do_ensure_default_agent() -> None:
     """Internal implementation of default agent initialization."""
+    from ..config.config import load_agent_config
+
     config = load_config()
 
     # Get or determine default workspace path
@@ -677,6 +726,25 @@ def _do_ensure_default_agent() -> None:
     default_workspace.mkdir(parents=True, exist_ok=True)
 
     _ensure_workspace_json_files(default_workspace, "default agent")
+
+    default_language = config.agents.language or "zh"
+    if agent_existed:
+        try:
+            existing_agent_config = load_agent_config("default")
+            default_language = (
+                existing_agent_config.language or default_language
+            )
+            _normalize_system_prompt_files(
+                "default",
+                default_workspace,
+                existing_agent_config,
+            )
+        except Exception:
+            logger.warning(
+                "Failed to load default agent config, using fallback "
+                "workspace initialization settings",
+                exc_info=True,
+            )
 
     # Only update config if agent didn't exist
     if not agent_existed:
@@ -702,9 +770,49 @@ def _do_ensure_default_agent() -> None:
 
         save_config(config)
         save_agent_config("default", template_result.agent_config)
+        default_language = (
+            template_result.agent_config.language or default_language
+        )
         logger.info(
             f"Created default agent with workspace: {default_workspace}",
         )
+
+    _ensure_agent_workspace_files(
+        "default",
+        default_workspace,
+        template_id=(
+            existing_agent_config.template_id
+            if agent_existed and "existing_agent_config" in locals()
+            else DEFAULT_AGENT_TEMPLATE
+        ),
+        language=default_language,
+    )
+
+    for agent_id, agent_ref in config.agents.profiles.items():
+        if agent_id == "default":
+            continue
+        try:
+            agent_config = load_agent_config(agent_id)
+            workspace_dir = Path(agent_ref.workspace_dir).expanduser()
+            agent_language = agent_config.language or config.agents.language or "zh"
+            _ensure_agent_workspace_files(
+                agent_id,
+                workspace_dir,
+                template_id=agent_config.template_id,
+                language=agent_language,
+            )
+            agent_config = load_agent_config(agent_id)
+            _normalize_system_prompt_files(
+                agent_id,
+                workspace_dir,
+                agent_config,
+            )
+        except Exception:
+            logger.warning(
+                "Failed to backfill workspace files for agent %s",
+                agent_id,
+                exc_info=True,
+            )
 
 
 def _other_agent_owns_workspace(
