@@ -13,6 +13,17 @@ from typing import Optional
 _PORT_ARG_PATTERN = re.compile(r"(?:^|\s)--port(?:=|\s+)(\d+)(?=\s|$)")
 
 
+def _text_run_kwargs(timeout: int) -> dict[str, object]:
+    """Use tolerant text decoding for OS process enumeration commands."""
+    return {
+        "capture_output": True,
+        "text": True,
+        "errors": "replace",
+        "timeout": timeout,
+        "check": False,
+    }
+
+
 def _coerce_optional_int(value: object) -> Optional[int]:
     """Best-effort conversion of JSON-decoded values to integers."""
     if value is None:
@@ -112,13 +123,7 @@ def _windows_process_snapshot() -> dict[int, tuple[Optional[int], str, str]]:
 
     for command, parser in commands:
         try:
-            result = subprocess.run(
-                command,
-                capture_output=True,
-                text=True,
-                timeout=15,
-                check=False,
-            )
+            result = subprocess.run(command, **_text_run_kwargs(timeout=15))
         except (OSError, subprocess.TimeoutExpired):
             continue
 
@@ -143,10 +148,7 @@ def _process_table() -> list[tuple[int, str]]:
     try:
         result = subprocess.run(
             ["ps", "-ax", "-o", "pid=", "-o", "command="],
-            capture_output=True,
-            text=True,
-            timeout=10,
-            check=False,
+            **_text_run_kwargs(timeout=10),
         )
     except (OSError, subprocess.TimeoutExpired):
         return []

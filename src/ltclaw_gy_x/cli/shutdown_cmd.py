@@ -24,6 +24,17 @@ _SIGTERM = signal.SIGTERM
 _SIGKILL = getattr(signal, "SIGKILL", _SIGTERM)
 
 
+def _text_run_kwargs(timeout: int) -> dict[str, object]:
+    """Use tolerant text decoding for OS process-control commands."""
+    return {
+        "capture_output": True,
+        "text": True,
+        "errors": "replace",
+        "timeout": timeout,
+        "check": False,
+    }
+
+
 def _backend_port(ctx: click.Context, port: Optional[int]) -> int:
     """Resolve backend port from explicit option or global CLI context."""
     if port is not None:
@@ -37,10 +48,7 @@ def _listening_pids_for_port(port: int) -> set[int]:
         try:
             result = subprocess.run(
                 ["netstat", "-ano", "-p", "tcp"],
-                capture_output=True,
-                text=True,
-                timeout=10,
-                check=False,
+                **_text_run_kwargs(timeout=10),
             )
         except (OSError, subprocess.TimeoutExpired):
             return set()
@@ -67,13 +75,7 @@ def _listening_pids_for_port(port: int) -> set[int]:
     )
     for command in commands:
         try:
-            result = subprocess.run(
-                command,
-                capture_output=True,
-                text=True,
-                timeout=10,
-                check=False,
-            )
+            result = subprocess.run(command, **_text_run_kwargs(timeout=10))
         except (OSError, subprocess.TimeoutExpired):
             continue
 
@@ -161,10 +163,7 @@ def _child_pids_unix(pid: int) -> set[int]:
         try:
             result = subprocess.run(
                 ["pgrep", "-P", str(current)],
-                capture_output=True,
-                text=True,
-                timeout=5,
-                check=False,
+                **_text_run_kwargs(timeout=5),
             )
         except (OSError, subprocess.TimeoutExpired):
             continue
@@ -226,13 +225,7 @@ def _terminate_process_tree_windows(pid: int, force: bool = False) -> None:
     if force:
         command.insert(1, "/F")
     try:
-        subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            timeout=10,
-            check=False,
-        )
+        subprocess.run(command, **_text_run_kwargs(timeout=10))
     except (OSError, subprocess.TimeoutExpired):
         pass
 
@@ -253,13 +246,7 @@ def _force_terminate_windows_process(pid: int) -> None:
     )
     for command in commands:
         try:
-            subprocess.run(
-                command,
-                capture_output=True,
-                text=True,
-                timeout=10,
-                check=False,
-            )
+            subprocess.run(command, **_text_run_kwargs(timeout=10))
         except (OSError, subprocess.TimeoutExpired):
             continue
 

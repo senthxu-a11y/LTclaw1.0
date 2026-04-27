@@ -7,13 +7,13 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 CONSOLE_DIR="$REPO_ROOT/console"
-CONSOLE_DEST="$REPO_ROOT/src/qwenpaw/console"
+CONSOLE_DEST="$REPO_ROOT/src/ltclaw_gy_x/console"
 
 echo "[wheel_build] Building console frontend..."
 (cd "$CONSOLE_DIR" && npm ci)
 (cd "$CONSOLE_DIR" && npm run build)
 
-echo "[wheel_build] Copying console/dist/* -> src/qwenpaw/console/..."
+echo "[wheel_build] Copying console/dist/* -> src/ltclaw_gy_x/console/..."
 rm -rf "$CONSOLE_DEST"/*
 
 mkdir -p "$CONSOLE_DEST"

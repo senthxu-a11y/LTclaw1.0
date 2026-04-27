@@ -36,7 +36,7 @@ RequestExecutionLevel user
 Section "LTCLAW-GY.X Desktop" SEC01
   SetOutPath "$INSTDIR"
   File /r "${UNPACKED}\*.*"
-  WriteRegStr HKCU "Software\QwenPaw" "InstallPath" "$INSTDIR"
+  WriteRegStr HKCU "Software\LTCLAW-GY.X" "InstallPath" "$INSTDIR"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
   ; Main shortcut - uses VBS to hide console window

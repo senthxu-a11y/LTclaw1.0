@@ -25,6 +25,29 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
+def _ensure_wrapper_file_logger() -> None:
+    """Persist desktop wrapper logs so window bootstrap failures are visible."""
+    log_path = WORKING_DIR / "desktop_logs" / "desktop.wrapper.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    resolved = str(log_path.resolve())
+    for handler in logger.handlers:
+        if isinstance(handler, logging.FileHandler) and getattr(
+            handler, "baseFilename", None
+        ) == resolved:
+            return
+
+    file_handler = logging.FileHandler(log_path, encoding="utf-8")
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(
+        logging.Formatter(
+            "%(levelname)s %(name)s:%(lineno)d | %(asctime)s | %(message)s",
+        )
+    )
+    logger.addHandler(file_handler)
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = True
+
+
 class WebViewAPI:
     """API exposed to the webview for external links and file downloads."""
 
@@ -133,6 +156,7 @@ def desktop_cmd(
     """
     # Setup logger for desktop command (separate from backend subprocess)
     setup_logger(log_level)
+    _ensure_wrapper_file_logger()
 
     port = _find_free_port(host)
     url = f"http://{host}:{port}"
@@ -197,21 +221,29 @@ def desktop_cmd(
             if _wait_for_http(host, port):
                 logger.info("HTTP ready, creating webview window...")
                 api = WebViewAPI()
-                webview.create_window(
+                window = webview.create_window(
                     "LTCLAW-GY.X Desktop",
                     url,
                     width=1280,
                     height=800,
+                    maximized=True,
+                    focus=True,
                     text_select=True,
                     js_api=api,
                 )
+                logger.info("Webview window created: %s", window)
                 logger.info(
                     "Calling webview.start() (blocks until closed)...",
                 )
-                webview.start(
-                    private_mode=False,
-                    storage_path=storage_path,
-                )  # blocks until user closes the window
+                start_kwargs = {
+                    "private_mode": False,
+                    "storage_path": storage_path,
+                    "debug": log_level.lower() == "debug",
+                }
+                if sys.platform.startswith("win"):
+                    start_kwargs["gui"] = "edgechromium"
+                logger.info("webview.start kwargs: %s", start_kwargs)
+                webview.start(**start_kwargs)  # blocks until user closes the window
                 logger.info("webview.start() returned (window closed).")
             else:
                 logger.error("Server did not become ready in time.")
