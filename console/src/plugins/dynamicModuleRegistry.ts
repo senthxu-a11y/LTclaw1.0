@@ -14,8 +14,8 @@
 import { moduleRegistry } from "./moduleRegistry";
 
 /**
- * Dynamically discover and register all modules in src/pages
- * Uses Vite's import.meta.glob for efficient lazy loading
+ * Dynamically discover and register page entry modules in src/pages.
+ * Uses Vite's import.meta.glob for efficient lazy loading.
  *
  * Note: This uses separate glob calls to properly exclude test files at build time
  */
@@ -23,13 +23,10 @@ export async function registerHostModulesDynamic(): Promise<void> {
   // Use positive and negative patterns to exclude test files at build time
   const modules = import.meta.glob<Record<string, unknown>>(
     [
-      "../pages/**/*.ts",
-      "../pages/**/*.tsx",
-      "!../pages/**/*.test.ts",
-      "!../pages/**/*.test.tsx",
-      "!../pages/**/*.spec.ts",
-      "!../pages/**/*.spec.tsx",
-      "!../pages/**/*.d.ts",
+      "../pages/*/index.ts",
+      "../pages/*/index.tsx",
+      "../pages/*/*/index.ts",
+      "../pages/*/*/index.tsx",
       "!../pages/**/__tests__/**",
     ],
     {
@@ -71,7 +68,7 @@ export async function registerHostModulesDynamic(): Promise<void> {
 }
 
 /**
- * Alternative: Eager loading (loads all modules immediately)
+ * Alternative: Eager loading (loads all page entry modules immediately)
  * Use this if you need all modules available at startup
  *
  * Excludes test files using negative glob patterns at build time
@@ -81,13 +78,10 @@ export function registerHostModulesEager(): void {
   // Use negative patterns to exclude test files at glob level
   const modules = import.meta.glob<Record<string, unknown>>(
     [
-      "../pages/**/*.ts",
-      "../pages/**/*.tsx",
-      "!../pages/**/*.test.ts",
-      "!../pages/**/*.test.tsx",
-      "!../pages/**/*.spec.ts",
-      "!../pages/**/*.spec.tsx",
-      "!../pages/**/*.d.ts",
+      "../pages/*/index.ts",
+      "../pages/*/index.tsx",
+      "../pages/*/*/index.ts",
+      "../pages/*/*/index.tsx",
       "!../pages/**/__tests__/**",
     ],
     {

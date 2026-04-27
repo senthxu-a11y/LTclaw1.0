@@ -2,15 +2,16 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./i18n";
 import { installHostExternals } from "./plugins/hostExternals";
-import { registerHostModulesEager } from "./plugins/dynamicModuleRegistry";
+import { registerHostModulesDynamic } from "./plugins/dynamicModuleRegistry";
 
 // Expose host dependencies (React, antd, etc.) on window
 // so that plugin UI modules can use them without bundling their own copies.
 installHostExternals();
 
-// Dynamic module registration - no generated files needed!
-// Automatically discovers all modules in src/pages at build time
-registerHostModulesEager();
+// Register host modules lazily so route chunks remain split.
+void registerHostModulesDynamic().catch((error) => {
+  console.warn("[patchable] Failed to register host modules dynamically", error);
+});
 
 if (typeof window !== "undefined") {
   const originalError = console.error;

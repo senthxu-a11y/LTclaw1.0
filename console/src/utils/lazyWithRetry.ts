@@ -35,10 +35,16 @@ function retryImport<T extends ComponentType<unknown>>(
   });
 }
 
-// All page modules, keyed relative to this file (src/utils/).
+// Page entry modules only, keyed relative to this file (src/utils/).
 // e.g. "../pages/Settings/Debug/index.tsx"
 const PAGE_MODULES = import.meta.glob<ComponentType<unknown>>(
-  ["../pages/**/*.{ts,tsx}", "!../pages/**/*.test.{ts,tsx}"],
+  [
+    "../pages/*/index.ts",
+    "../pages/*/index.tsx",
+    "../pages/*/*/index.ts",
+    "../pages/*/*/index.tsx",
+    "!../pages/**/__tests__/**",
+  ],
   { import: "default" },
 );
 
