@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <AntHeader className={styles.header}>
       <div className={styles.logoWrapper}>
-        <span className={styles.logoText}>LTCLAW-GY.X</span>
+        <span className={styles.logoText}>LTClaw</span>
         <div className={styles.logoDivider} />
         <span className={styles.logoVersion}>{DISPLAY_VERSION}</span>
       </div>

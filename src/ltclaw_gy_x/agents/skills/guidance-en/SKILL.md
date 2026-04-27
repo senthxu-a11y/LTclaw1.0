@@ -1,6 +1,6 @@
 ---
 name: guidance
-description: "Answer user questions about LTCLAW-GY.X installation and configuration: first locate and read local documentation, then distill the answer; if local information is insufficient, fall back to the official website documentation."
+description: "Answer user questions about LTClaw installation and configuration: first locate and read local documentation, then distill the answer; if local information is insufficient, fall back to the official website documentation."
 metadata:
   builtin_skill_version: "1.2"
   ltclaw-gy-x:
@@ -8,9 +8,9 @@ metadata:
     requires: {}
 ---
 
-# LTCLAW-GY.X Installation and Configuration Q&A Guide
+# LTClaw Installation and Configuration Q&A Guide
 
-Use this skill when the user asks about **LTCLAW-GY.X installation, initialization, environment configuration, dependency requirements, or common configuration options**.
+Use this skill when the user asks about **LTClaw installation, initialization, environment configuration, dependency requirements, or common configuration options**.
 
 Core principles:
 
@@ -42,7 +42,7 @@ Run the following script logic to obtain the variable $QWENPAW_ROOT:
 COP_PATH=$(which ltclaw-gy-x 2>/dev/null || whereis ltclaw-gy-x | awk '{print $2}')
 
 # Logical deduction: if the path contains .ltclaw-gy-x/bin/ltclaw-gy-x, the root is three levels up
-# Example: /path/to/LTCLAW-GY.X/.ltclaw-gy-x/bin/ltclaw-gy-x -> /path/to/LTCLAW-GY.X
+# Example: /path/to/LTClaw/.ltclaw_gy_x/bin/ltclaw_gy_x -> /path/to/LTClaw
 if [[ "$COP_PATH" == *".ltclaw-gy-x/bin/ltclaw-gy-x" ]]; then
     QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.ltclaw-gy-x\/bin\/ltclaw-gy-x//')
 else
@@ -50,7 +50,7 @@ else
     QWENPAW_ROOT=$(dirname $(dirname "$COP_PATH") 2>/dev/null || echo ".")
 fi
 
-echo "Detected LTCLAW-GY.X Root: $QWENPAW_ROOT"
+echo "Detected LTClaw Root: $QWENPAW_ROOT"
 ```
 
 Verify and list the documentation directory:

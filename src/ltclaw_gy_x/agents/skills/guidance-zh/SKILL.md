@@ -1,6 +1,6 @@
 ---
 name: guidance
-description: "回答用户关于 LTCLAW-GY.X 安装与配置的问题：优先定位并阅读本地文档，再提炼答案；若本地信息不足，兜底访问官网文档。"
+description: "回答用户关于 LTClaw 安装与配置的问题：优先定位并阅读本地文档，再提炼答案；若本地信息不足，兜底访问官网文档。"
 metadata:
   builtin_skill_version: "1.2"
   ltclaw-gy-x:
@@ -8,9 +8,9 @@ metadata:
     requires: {}
 ---
 
-# LTCLAW-GY.X 安装与配置问答指南
+# LTClaw 安装与配置问答指南
 
-当用户询问 **LTCLAW-GY.X 的安装、初始化、环境配置、依赖要求、常见配置项** 时，使用本 skill。
+当用户询问 **LTClaw 的安装、初始化、环境配置、依赖要求、常见配置项** 时，使用本 skill。
 
 核心原则：
 
@@ -43,7 +43,7 @@ DOC_DIR=$(find ~/.ltclaw-gy-x/memory/ -type d -name "docs")
 COP_PATH=$(which ltclaw-gy-x 2>/dev/null || whereis ltclaw-gy-x | awk '{print $2}')
 
 # 逻辑推导：如果路径包含 .ltclaw-gy-x/bin/ltclaw-gy-x，则根目录在其上三层
-# 例如：/path/to/LTCLAW-GY.X/.ltclaw-gy-x/bin/ltclaw-gy-x -> /path/to/LTCLAW-GY.X
+# 例如：/path/to/LTClaw/.ltclaw_gy_x/bin/ltclaw_gy_x -> /path/to/LTClaw
 if [[ "$COP_PATH" == *".ltclaw-gy-x/bin/ltclaw-gy-x" ]]; then
     QWENPAW_ROOT=$(echo "$COP_PATH" | sed 's/\/\.ltclaw-gy-x\/bin\/ltclaw-gy-x//')
 else
@@ -51,7 +51,7 @@ else
     QWENPAW_ROOT=$(dirname $(dirname "$COP_PATH") 2>/dev/null || echo ".")
 fi
 
-echo "Detected LTCLAW-GY.X Root: $QWENPAW_ROOT"
+echo "Detected LTClaw Root: $QWENPAW_ROOT"
 ```
 
 验证并列出文档目录：

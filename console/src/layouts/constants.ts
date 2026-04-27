@@ -1,5 +1,5 @@
 // ── URLs ──────────────────────────────────────────────────────────────────
-// LTCLAW-GY.X - Local deployment, external URLs disabled for data security
+// LTClaw - Local deployment, external URLs disabled for data security
 
 export const PYPI_URL = "https://pypi.org/pypi/ltclaw-gy-x/json";
 
@@ -70,13 +70,13 @@ export const getWebsiteLang = (lang: string): string =>
   lang.startsWith("zh") ? "zh" : "en";
 
 export const getDocsUrl = (_lang: string): string =>
-  `#`;  // Disabled - LTCLAW-GY.X local deployment
+  `#`;  // Disabled - LTClaw local deployment
 
 export const getFaqUrl = (_lang: string): string =>
-  `#`;  // Disabled - LTCLAW-GY.X local deployment
+  `#`;  // Disabled - LTClaw local deployment
 
 export const getReleaseNotesUrl = (_lang: string): string =>
-  `#`;  // Disabled - LTCLAW-GY.X local deployment
+  `#`;  // Disabled - LTClaw local deployment
 
 // ── Version helpers ────────────────────────────────────────────────────────
 
@@ -130,9 +130,9 @@ export const compareVersions = (a: string, b: string): number => {
 // ── Update markdown ───────────────────────────────────────────────────────
 // TODO
 export const UPDATE_MD: Record<string, string> = {
-  zh: `### LTCLAW-GY.X如何更新
+  zh: `### LTClaw如何更新
 
-要更新 LTCLAW-GY.X 到最新版本，可根据你的安装方式选择对应方法：
+要更新 LTClaw 到最新版本，可根据你的安装方式选择对应方法：
 
 1. 如果你使用的是一键安装脚本，直接重新运行安装命令即可自动升级。
 
@@ -145,7 +145,7 @@ ltclaw_gy_x update
 3. 如果你是从源码安装，进入项目目录并拉取最新代码后重新安装：
 
 \`\`\`
-cd LTCLAW-GY.X
+cd LTClaw
 git pull origin main
 cd console && npm ci && npm run build
 cd .. && mkdir -p src/ltclaw_gy_x/console
@@ -162,9 +162,9 @@ docker run -p 127.0.0.1:8088:8088 -v ltclaw_gy_x-data:/app/working agentscope/lt
 
 升级后重启服务 ltclaw_gy_x app。`,
 
-  ru: `### Как обновить LTCLAW-GY.X
+  ru: `### Как обновить LTClaw
 
-Чтобы обновить LTCLAW-GY.X, выберите способ в зависимости от типа установки:
+Чтобы обновить LTClaw, выберите способ в зависимости от типа установки:
 
 1. Если вы устанавливали через однострочный скрипт, повторно запустите установщик для обновления.
 
@@ -177,7 +177,7 @@ ltclaw_gy_x update
 3. Если устанавливали из исходников, получите последние изменения и переустановите:
 
 \`\`\`
-cd LTCLAW-GY.X
+cd LTClaw
 git pull origin main
 cd console && npm ci && npm run build
 cd .. && mkdir -p src/ltclaw_gy_x/console
@@ -194,9 +194,9 @@ docker run -p 127.0.0.1:8088:8088 -v ltclaw_gy_x-data:/app/working agentscope/lt
 
 After upgrading, restart the service with \`ltclaw_gy_x app\`.`,
 
-  en: `### How to update LTCLAW-GY.X
+  en: `### How to update LTClaw
 
-To update LTCLAW-GY.X, use the method matching your installation type:
+To update LTClaw, use the method matching your installation type:
 
 1. If installed via one-line script, re-run the installer to upgrade.
 
@@ -209,7 +209,7 @@ ltclaw_gy_x update
 3. If installed from source, pull the latest code and reinstall:
 
 \`\`\`
-cd LTCLAW-GY.X
+cd LTClaw
 git pull origin main
 cd console && npm ci && npm run build
 cd .. && mkdir -p src/ltclaw_gy_x/console

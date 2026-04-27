@@ -355,7 +355,7 @@ class VoiceChannelConfig(BaseChannelConfig):
     tts_voice: str = "en-US-Journey-D"
     stt_provider: str = "deepgram"
     language: str = "en-US"
-    welcome_greeting: str = "Hi! This is LTCLAW-GY.X. How can I help you?"
+    welcome_greeting: str = "Hi! This is LTClaw. How can I help you?"
 
 
 class SIPChannelConfig(BaseChannelConfig):
@@ -375,7 +375,7 @@ class SIPChannelConfig(BaseChannelConfig):
     tts_voice: str = ""
     stt_provider: str = "aliyun"
     language: str = "zh-CN"
-    welcome_greeting: str = "你好，我是LTCLAW-GY.X"
+    welcome_greeting: str = "你好，我是LTClaw"
     call_timeout: float = 120.0
     livekit_url: str = ""
     livekit_api_key: str = ""
@@ -1734,7 +1734,7 @@ def migrate_legacy_config_to_multi_agent() -> bool:
     default_agent_config = AgentProfileConfig(
         id="default",
         name="Default Agent",
-        description="Default LTCLAW-GY.X agent",
+        description="Default LTClaw agent",
         workspace_dir=str(default_workspace),
         channels=config.channels if config.channels else None,
         mcp=config.mcp if config.mcp else None,

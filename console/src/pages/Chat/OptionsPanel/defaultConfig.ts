@@ -7,7 +7,7 @@ const defaultConfig = {
     prefix: "ltclaw_gy_x",
     leftHeader: {
       logo: "",
-      title: "Work with LTCLAW-GY.X",
+      title: "Work with LTClaw",
     },
   },
   sender: {
